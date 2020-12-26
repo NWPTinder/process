@@ -14,19 +14,20 @@
 GitHub Organizationを利用して、全員にOwnerを割り振ったので、これまで必要だった@semuchamの確認なしにmainブランチに変更を反映することができるようになりました
 
 ## 簡単に最初の始め方を説明
-まだ、試していないですが、方法1でやれば承認がいらないので楽だと思います。
+まだ、試していないですが、方法1でやれば承認がいらないので楽だと思います。  
 方法1  
 1. Gitをインストール
 2. ```git clone https://github.com/NWPTinder/prosess.git``` 
 3. ブランチを作成
 4. 変更をコミット
 5. 作成したブランチをmainに統合
+
 方法2  
 1. Gitをインストール
 2. リポジトリをForkしてcloneする
 3. ブランチを作成
 4. 変更をコミット
 5. 作成したブランチをmainに統合
-6. /NWPTinder/prosess.gitにプルリクエストを送信
+6. `/NWPTinder/prosess.git`にプルリクエストを送信
 
 cf. [githubのorganizationアカウントの運営について](https://qiita.com/chari/items/ee16bf16715f4bbcbd9b)
