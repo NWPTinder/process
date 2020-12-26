@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tinder_server", "WebApplication1\Tinder_server.csproj", "{F6494ECC-21BF-4E0D-94F7-A0A1375CF602}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6494ECC-21BF-4E0D-94F7-A0A1375CF602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6494ECC-21BF-4E0D-94F7-A0A1375CF602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6494ECC-21BF-4E0D-94F7-A0A1375CF602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6494ECC-21BF-4E0D-94F7-A0A1375CF602}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43D2F25A-EF00-49BD-B618-364EF9CD8A31}
+	EndGlobalSection
+EndGlobal
