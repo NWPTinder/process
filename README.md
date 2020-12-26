@@ -2,7 +2,8 @@
 個人的にアプリ名を「Pretender」とするのがいいかなと思っています。「Pretender」は「～のふりをする人」という意味でOfficial髭男dismの楽曲名の一つとなっています。  
 いちおう、この名前の面白さを説明すると、「Tinder」と「Tender」が似ていて、「Tinder」のパクリであるという意味で「Pretender」(: Tinderのふりをする)がかかっているわけですね。  
 え、面白くない？？   
-それでは改めてみんなでこの名前を考える必要があるようですね。
+それでは改めてみんなでこの名前を考える必要があるようですね。  
+ :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: :santa: 
 ## リポジトリの説明 
 この組織のprosessは処理部分を格納したリポジトリです
 
