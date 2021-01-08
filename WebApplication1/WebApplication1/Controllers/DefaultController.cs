@@ -20,11 +20,11 @@ namespace WebApplication1.Controllers
         public HttpResponseMessage Def()
         {
             Data data = new Data();
-            data.UserName = "aaa";
-            data.No = 1;
+            data.username = "aaa";
+            data.id = 1;
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
-            res.Content = new StringContent(json, Encoding.UTF8,"application/json");
+            res.Content = new StringContent(json, Encoding.UTF8, "application/json");
             return res;
         }
 
@@ -35,17 +35,17 @@ namespace WebApplication1.Controllers
         }
 
         // POST: api/Default
-        public HttpResponseMessage Post([FromBody]  Data value)
+        public HttpResponseMessage Post([FromBody] string value)
         {
 
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            //string json = Newtonsoft.Json.JsonConvert.SerializeObject(value);
             HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
-            res.Content = new StringContent(json, Encoding.UTF8, "application/json");
+            res.Content = new StringContent(value, Encoding.UTF8, "application/json");
             return res;
         }
 
         // PUT: api/Default/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 

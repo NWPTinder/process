@@ -26,8 +26,20 @@ namespace WindowsFormsApplication1
         private void button4_Click(object sender, EventArgs e)
         {
             Data uuu = function.Get();
-            textBox5.Text = uuu.UserName;
-            textBox6.Text = uuu.No.ToString();
+            textBox5.Text = uuu.username;
+            textBox6.Text = (uuu.id.ToString());
+            Data temp = function.Get();
+            dataGridView1.DataSource = temp;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void richTextBox3_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

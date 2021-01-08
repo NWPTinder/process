@@ -37,6 +37,7 @@ namespace WindowsFormsApplication1
             var response = client.Execute(request);
             bool isOK = response.StatusCode == HttpStatusCode.OK;
             Data aaa = new Data();
+            
             aaa = JsonConvert.DeserializeObject<Data>(response.Content);
             return aaa;
         }

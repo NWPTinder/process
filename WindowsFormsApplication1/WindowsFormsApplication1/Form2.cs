@@ -20,17 +20,18 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Data iii = new Data();
-            iii.UserName = textBox1.Text;
-            iii.No = (int)numericUpDown1.Value;
-            iii.Jusho = textBox2.Text;
-            iii.Shumi = textBox3.Text;
-            if (radioButton1 != null) iii.Type = true;
-            function.Post(iii);
+            Data button1_Click_char  = new Data();
+            button1_Click_char.Seter((long)numericUpDown1.Value, textBox1.Text, 10, true, "hoge", 2);
+
+            if (radioButton1 != null) button1_Click_char.Type = true;
+            function.Post(button1_Click_char);
             this.Close();
         }
 
-         
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
     
