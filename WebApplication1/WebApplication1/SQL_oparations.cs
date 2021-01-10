@@ -63,22 +63,39 @@ namespace Tinder
 			return TinderUserInfoDB;
 		}
 
-		public static void INSERT_DATA()
+		//sign upして送られてきたデータをdatabaseに格納
+		public static void INSERT_DATA(person data)
         {
 
         }
 
-		public static void SERECT_RANK()
+		//ランキング情報を取得する関数
+		//何人まで取得するか検討中
+		//返り値をstring(json)型にするか、person型にするか決定してません。
+		public static void SELECT_RANK()
         {
 
         }
 
-		public static void SERECT_()
+
+		//データベースからランダムでSELECT
+		//ランダム関数を使ってIDを決定する。ランダム値は最古IDから最新IDの中で発生(自分のIDも含まれてしまう可能性もあるがそれはまた後で)
+		public static void SELECT_RND()
         {
 
         }
 
-		public static void INSERT_THUMBS()
+		//いいねをカウントアップする関数 defaultcontrollerから引数IDを取得して該当するデータを変更する。
+		public static void INSERT_THUMBS(int id)
+        {
+			//SQL conection
+			//SQL 引数のID を使って 該当のデータのいいね数を+1でupdate 
+        }
+
+		//データベースとのコネクションを確立させる関数
+		//あったほうがスッキリしそう。
+		//作ったとしてそれぞれの関数内でconnectionをcloseするのをお忘れなく
+		public static void CONNECTION()
         {
 
         }

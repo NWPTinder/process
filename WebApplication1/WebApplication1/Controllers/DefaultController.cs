@@ -53,7 +53,6 @@ namespace WebApplication1.Controllers
         // GET: api/Default/5
         public string Get(int id)
         {
-
             return "value";
         }
 
