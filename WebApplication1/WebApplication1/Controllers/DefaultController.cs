@@ -14,12 +14,13 @@ namespace WebApplication1.Controllers
     public class DefaultController : ApiController
     {
         // GET: api/Default
+        
         [HttpGet]
         [Route("Def")]
         //public HttpResponseMessage Get()
         public HttpResponseMessage Def()
         {
-            Data data = new Data();
+            person data = new person();
             data.username = "aaa";
             data.id = 1;
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
@@ -28,9 +29,31 @@ namespace WebApplication1.Controllers
             return res;
         }
 
+        //GET:  api/Defaul/test
+        public HttpResponseMessage Test()
+        {
+            {
+                person test = new person();
+                test.id = 20010430;
+                test.username = "testname";
+                test.age = 100;
+                test.sex = true;
+                test.whoami = "whoami";
+                test.liked = 0;
+
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(test);
+                HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
+                res.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                return res;
+            }
+        }
+
+
+
         // GET: api/Default/5
         public string Get(int id)
         {
+
             return "value";
         }
 

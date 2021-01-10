@@ -14,9 +14,9 @@ using System.Windows;
 
 namespace Tinder
 {
-	class Database
+	public static class SQL_oparations
 	{
-		private DataSet RetriveOderbyLike(object sender, EventArgs e)
+		private static DataSet RetriveOderbyLike(object sender, EventArgs e)
 		{
 			// MySQLへの接続情報
 			string server = "us-cdbr-east-02.cleardb.com";        // MySQLサーバホスト名
@@ -62,5 +62,26 @@ namespace Tinder
 
 			return TinderUserInfoDB;
 		}
+
+		public static void INSERT_DATA()
+        {
+
+        }
+
+		public static void SERECT_RANK()
+        {
+
+        }
+
+		public static void SERECT_()
+        {
+
+        }
+
+		public static void INSERT_THUMBS()
+        {
+
+        }
+
 	}
 }
