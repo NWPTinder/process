@@ -14,9 +14,9 @@ using System.Windows;
 
 namespace Tinder
 {
-	class Database
+	public static class SQL_oparations
 	{
-		private DataSet RetriveOderbyLike(object sender, EventArgs e)
+		private static DataSet RetriveOderbyLike(object sender, EventArgs e)
 		{
 			// MySQLへの接続情報
 			string server = "us-cdbr-east-02.cleardb.com";        // MySQLサーバホスト名
@@ -62,5 +62,43 @@ namespace Tinder
 
 			return TinderUserInfoDB;
 		}
+
+		//sign upして送られてきたデータをdatabaseに格納
+		public static void INSERT_DATA(person data)
+        {
+
+        }
+
+		//ランキング情報を取得する関数
+		//何人まで取得するか検討中
+		//返り値をstring(json)型にするか、person型にするか決定してません。
+		public static void SELECT_RANK()
+        {
+
+        }
+
+
+		//データベースからランダムでSELECT
+		//ランダム関数を使ってIDを決定する。ランダム値は最古IDから最新IDの中で発生(自分のIDも含まれてしまう可能性もあるがそれはまた後で)
+		public static void SELECT_RND()
+        {
+
+        }
+
+		//いいねをカウントアップする関数 defaultcontrollerから引数IDを取得して該当するデータを変更する。
+		public static void INSERT_THUMBS(int id)
+        {
+			//SQL conection
+			//SQL 引数のID を使って 該当のデータのいいね数を+1でupdate 
+        }
+
+		//データベースとのコネクションを確立させる関数
+		//あったほうがスッキリしそう。
+		//作ったとしてそれぞれの関数内でconnectionをcloseするのをお忘れなく
+		public static void CONNECTION()
+        {
+
+        }
+
 	}
 }

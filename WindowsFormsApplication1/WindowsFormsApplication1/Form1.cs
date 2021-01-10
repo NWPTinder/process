@@ -27,9 +27,8 @@ namespace WindowsFormsApplication1
         {
             Data uuu = function.Get();
             textBox5.Text = uuu.username;
-            textBox6.Text = (uuu.id.ToString());
-            Data temp = function.Get();
-            dataGridView1.DataSource = temp;
+            textBox6.Text = uuu.id.ToString();
+           
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
