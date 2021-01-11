@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Text;
 
 using WebApplication1.Models;
+using Tinder;
 
 namespace WebApplication1.Controllers
 {
@@ -41,9 +42,12 @@ namespace WebApplication1.Controllers
                 test.whoami = "whoami";
                 test.liked = 0;
 
+                
+
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(test);
                 HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
                 res.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
                 return res;
             }
         }
