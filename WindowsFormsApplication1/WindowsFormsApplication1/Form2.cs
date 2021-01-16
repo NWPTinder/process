@@ -21,9 +21,9 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             Data button1_Click_char  = new Data();
-            button1_Click_char.Seter((long)numericUpDown1.Value, textBox1.Text, 10, true, "hoge", 2);
+            button1_Click_char.Seter((long)Enter_age.Value, Enter_name.Text, 10, true, "hoge", 2);
 
-            if (radioButton1 != null) button1_Click_char.Type = true;
+            if (Select_male != null) button1_Click_char.Type = true;
             function.Post(button1_Click_char);
             this.Close();
         }
