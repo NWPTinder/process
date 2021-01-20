@@ -17,31 +17,22 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+
+
+        //Thumbup to server
+        private void Thumbup_button_Click(object sender, EventArgs e)
         {
-            Form2 from2 = new Form2();
-            from2.Show();
+            function.Get();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        //singup 
+        private void Registration_button_Click(object sender, EventArgs e)
         {
-            Data uuu = function.Get();
-            Name_display.Text = uuu.username;
-            Age_display.Text = uuu.id.ToString();
-           
+            Form2 form2 = new Form2();
+            form2.Show();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
-        private void richTextBox3_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label7_Click(object sender, EventArgs e)
+        private void Update_button_Click(object sender, EventArgs e)
         {
 
         }

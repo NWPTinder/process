@@ -31,8 +31,9 @@ namespace WindowsFormsApplication1
             // Create Client&RestRequest
             var client = new RestClient();
             var request = new RestRequest();
+            string URL = "https://localhost:44346/api/default/Getuser/";
             //URL Setting
-            client.BaseUrl = new Uri("https://localhost:44346/Def");
+            client.BaseUrl = new Uri(URL);
             request.Method = Method.GET;
             var response = client.Execute(request);
             bool isOK = response.StatusCode == HttpStatusCode.OK;
@@ -41,5 +42,24 @@ namespace WindowsFormsApplication1
             aaa = JsonConvert.DeserializeObject<Data>(response.Content);
             return aaa;
         }
+
+        public static Data Get_IINE(int id)
+        {
+            // Create Client&RestRequest
+            var client = new RestClient();
+            var request = new RestRequest();
+            string URL = "https://localhost:44346/api/default/Getuser/" + id ;
+            //URL Setting
+            client.BaseUrl = new Uri(URL);
+            request.Method = Method.GET;
+            var response = client.Execute(request);
+            bool isOK = response.StatusCode == HttpStatusCode.OK;
+            Data aaa = new Data();
+
+            aaa = JsonConvert.DeserializeObject<Data>(response.Content);
+            return aaa;
+        }
+
+
     }
 }

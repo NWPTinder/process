@@ -120,7 +120,7 @@ namespace Tinder
 
 		//データベースからランダムでSELECT
 		//ランダム関数を使ってIDを決定する。ランダム値は最古IDから最新IDの中で発生(自分のIDも含まれてしまう可能性もあるがそれはまた後で)
-		public void SELECT_RND()
+		public static person SELECT_RND()
 		{
 			this.RetriveWholeDB();
 
@@ -132,17 +132,20 @@ namespace Tinder
 
 			Random RandomNum = new System.Random();
 			int Selector = RandomNum.Next(0, IDs.Count());
-			DateTime Selectedid = (DateTime)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[Selector]["id"];
+			DateTime SelectedId = (DateTime)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[Selector]["id"];
 			var SelectedUserName = TinderUserInfoDB.Tables["tinderuserinfo"].Rows[Selector]["username"];
-			// ....
-			Console.WriteLine(Selectedid); // 選ばれた人のidを出力
 
+			person SelectedUser = new person();
+            // ....
+
+			//返り値はperson型で
+            return SelectedUser;
 
 
 		}
 
 		//いいねをカウントアップする関数 defaultcontrollerから引数IDを取得して該当するデータを変更する。
-		public  void INSERT_THUMBS(int id)
+		public  static void INSERT_THUMBS(int id)
 		{
 			//SQL conection
 			//SQL 引数のID を使って 該当のデータのいいね数を+1でupdate 
@@ -191,13 +194,24 @@ namespace Tinder
 
 		}
 
-		//データベースとのコネクションを確立させる関数
-		//あったほうがスッキリしそう。
-		//作ったとしてそれぞれの関数内でconnectionをcloseするのをお忘れなく
-		public static void CONNECTION()
-		{
+		/// <summary>
+		/// id から　user を検索し
+		/// データを返り値として出力
+		/// </summary>
+		public static person Select_user()
+        {
+			person aaa = new person();
+			return aaa;
+			
+        }
+		/// <summary>
+		/// user情報をアップデート。iine
+		/// 引数で受け取ったものを変更
+		/// </summary>
+		/// <param name="id"></param>
+		public static void update_user_iine(int id)
+        {
 
-		}
-
+        }
 	}
 }
