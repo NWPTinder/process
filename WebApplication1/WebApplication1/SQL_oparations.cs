@@ -35,16 +35,6 @@ namespace Tinder
 				DefaultController SentJson = new DefaultController();
 				// SentJson.Post(TinderUserInfoJson);
 
-
-				//DataTable dt = new DataTable();
-				//Console.WriteLine(TinderUserInfoDB.Tables["tinderuserinfo"].Rows[0]["age"]);
-				/*foreach (DataRow pRow in TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
-				{
-
-					Console.WriteLine("{0}, {1}", pRow["age"], pRow["id"]);
-				}
-				*/
-
 			}
 			catch (MySqlException me)
 			{
@@ -191,13 +181,7 @@ namespace Tinder
 
 		}
 
-		//データベースとのコネクションを確立させる関数
-		//あったほうがスッキリしそう。
-		//作ったとしてそれぞれの関数内でconnectionをcloseするのをお忘れなく
-		public static void CONNECTION()
-		{
 
-		}
 
 	}
 }

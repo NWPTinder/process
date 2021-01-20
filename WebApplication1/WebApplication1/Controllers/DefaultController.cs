@@ -15,40 +15,52 @@ namespace WebApplication1.Controllers
     public class DefaultController : ApiController
     {
         // GET: api/Default
-        
+
         [HttpGet]
-        [Route("Def")]
-        //public HttpResponseMessage Get()
-        public HttpResponseMessage Def()
+        /// <summary>
+        /// パラメータのない GET メソッドに対応するメソッド 
+        /// 更新がかかったときなどに適当なuserを取得
+        /// 例：GET /api/default/GetUser
+        /// </summary>
+        /// <returns></returns>
+        public HttpResponseMessage GetUser()
         {
-            // ######### テスト用の関数です。Staticなのでメソッドに直接アクセスでき言い値数が++1になっていることを　#########
-            // ######### 確認できるはずです #########
-            SQL_oparations.INSERT_THUMBS(11);
-            // ############## ######
-            person data = new person();
-            data.username = "aaa";
-            data.id = 1;
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            person test = new person();
+            // person User = SQL_oparations.Select_user()
+            test.id = 2001;
+            test.username = "testname";
+            test.age = 100;
+            test.sex = true;
+            test.whoami = "whoami";
+            test.liked = 0;
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(test);
             HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
             res.Content = new StringContent(json, Encoding.UTF8, "application/json");
             return res;
         }
 
-        //GET:  api/Defaul/test
-        public HttpResponseMessage Test()
+
+
+        /// <summary>
+        /// id パラメータのある GETメソッドに対応するメソッド
+        /// 例：/api/default/GetUser
+        /// いいねされたときに使います。Getuserのパラメータにint型のIDが入力されたとき、該当のIDに対するカウントアップとランダムで別のIDuserを出力。
+        /// </summary>
+        /// <returns></returns>
+        public HttpResponseMessage GetUser(int id)
         {
             {
-                person test = new person();
-                test.id = 20010430;
-                test.username = "testname";
-                test.age = 100;
-                test.sex = true;
-                test.whoami = "whoami";
-                test.liked = 0;
 
+                person Selection_id = new person();
 
-                
-                string json = Newtonsoft.Json.JsonConvert.SerializeObject(test);
+                Selection_id.id = 2001;
+                Selection_id.username = "testname";
+                Selection_id.age = 100;
+                Selection_id.sex = true;
+                Selection_id.whoami = "whoami";
+                Selection_id.liked = 0;
+
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(Selection_id);
                 HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
                 res.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -56,13 +68,6 @@ namespace WebApplication1.Controllers
             }
         }
 
-
-
-        // GET: api/Default/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST: api/Default
         public HttpResponseMessage Post([FromBody] string value)
