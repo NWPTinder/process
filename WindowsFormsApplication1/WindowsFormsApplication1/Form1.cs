@@ -12,38 +12,65 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// フォーム展開時、ランダムなUser表示
+        /// &ランキング更新
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
+            Person display_user = new Person();
+            display_user = function.Get();
+            Name_display.Text = display_user.username;
+            Age_display.Text = display_user.age.ToString();
+            Description_display.Text = display_user.whoami;
+            ID_display.Text = display_user.id.ToString();
+
         }
 
-        private void button5_Click(object sender, EventArgs e)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Thumbup_button_Click(object sender, EventArgs e)
         {
-            Form2 from2 = new Form2();
-            from2.Show();
+            int IINE_ID = Convert.ToInt32(ID_display.Text);
+            Person display_user = new Person();
+            display_user = function.GET_IINE(IINE_ID);
+            Name_display.Text = display_user.username;
+            Age_display.Text = display_user.age.ToString();
+            Description_display.Text = display_user.whoami;
+            ID_display.Text = display_user.id.ToString();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        /// <summary>
+        /// User登録画面の展開
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Registration_button_Click(object sender, EventArgs e)
         {
-            Data uuu = function.Get();
-            Name_display.Text = uuu.username;
-            Age_display.Text = uuu.id.ToString();
-           
+            Form2 Regist_page = new Form2();
+            Regist_page.Show();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        /// <summary>
+        ///　ランダムなUserを出力
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Update_button_Click(object sender, EventArgs e)
         {
-            
+            Person display_user = new Person();
+            display_user = function.Get();
+            Name_display.Text = display_user.username;
+            Age_display.Text = display_user.age.ToString();
+            Description_display.Text = display_user.whoami;
+            ID_display.Text = display_user.id.ToString();
         }
 
-        private void richTextBox3_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
 
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

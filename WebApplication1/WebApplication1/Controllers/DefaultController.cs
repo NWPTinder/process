@@ -31,7 +31,7 @@ namespace WebApplication1.Controllers
             test.username = "testname";
             test.age = 100;
             test.sex = true;
-            test.whoami = "whoami";
+            test.whoami = "こんにちわこんにちわこんち庭こんわちわ";
             test.liked = 0;
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(test);
             HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
@@ -43,7 +43,7 @@ namespace WebApplication1.Controllers
 
         /// <summary>
         /// id パラメータのある GETメソッドに対応するメソッド
-        /// 例：/api/default/GetUser
+        /// 例：/api/default/GetUser/5
         /// いいねされたときに使います。Getuserのパラメータにint型のIDが入力されたとき、該当のIDに対するカウントアップとランダムで別のIDuserを出力。
         /// </summary>
         /// <returns></returns>
@@ -53,11 +53,11 @@ namespace WebApplication1.Controllers
 
                 person Selection_id = new person();
 
-                Selection_id.id = 2001;
-                Selection_id.username = "testname";
-                Selection_id.age = 100;
+                Selection_id.id = 5555;
+                Selection_id.username = "name";
+                Selection_id.age = 123;
                 Selection_id.sex = true;
-                Selection_id.whoami = "whoami";
+                Selection_id.whoami = "45682";
                 Selection_id.liked = 0;
 
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(Selection_id);
@@ -70,12 +70,18 @@ namespace WebApplication1.Controllers
 
 
         // POST: api/Default
-        public HttpResponseMessage Post([FromBody] string value)
+
+        /// <summary>
+        /// 例：/api/default/Post
+        /// </summary>
+        /// <param name="singup_user"></param>
+        /// <returns></returns>
+        public HttpResponseMessage Post([FromBody] person singup_user)
         {
 
-            //string json = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(singup_user);
             HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
-            res.Content = new StringContent(value, Encoding.UTF8, "application/json");
+            res.Content = new StringContent(json , Encoding.UTF8, "application/json");
             return res;
         }
 
