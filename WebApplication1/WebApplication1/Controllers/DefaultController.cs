@@ -21,6 +21,10 @@ namespace WebApplication1.Controllers
         //public HttpResponseMessage Get()
         public HttpResponseMessage Def()
         {
+            // ######### テスト用の関数です。Staticなのでメソッドに直接アクセスでき言い値数が++1になっていることを　#########
+            // ######### 確認できるはずです #########
+            SQL_oparations.INSERT_THUMBS(11);
+            // ############## ######
             person data = new person();
             data.username = "aaa";
             data.id = 1;
@@ -42,8 +46,8 @@ namespace WebApplication1.Controllers
                 test.whoami = "whoami";
                 test.liked = 0;
 
-                
 
+                
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(test);
                 HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
                 res.Content = new StringContent(json, Encoding.UTF8, "application/json");

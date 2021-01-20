@@ -16,9 +16,9 @@ namespace Tinder
 {
 	public class SQL_oparations
 	{
-		DataSet TinderUserInfoDB = new DataSet(); // DBのすべての内容を格納する変数
+		static DataSet TinderUserInfoDB = new DataSet(); // DBのすべての内容を格納する変数
 		//private  DataSet RetriveWholeDB(object sender, EventArgs e)
-		private DataSet RetriveWholeDB()
+		 public static DataSet RetriveWholeDB()
 		{
 			//// MySQLへの接続
 			try
@@ -29,16 +29,16 @@ namespace Tinder
 				MySqlDataAdapter FirstAdapter = new MySqlDataAdapter(
 				 "SELECT * FROM tinderuserinfo", cn);
 				// SELECT* FROM tinderuserinfo ORDER BY liked DESC LIMIT 3;
-				FirstAdapter.Fill(this.TinderUserInfoDB, "tinderuserinfo");
+				FirstAdapter.Fill(TinderUserInfoDB, "tinderuserinfo");
 				// jsonに変換する場合
-				String TinderUserInfoJson = Newtonsoft.Json.JsonConvert.SerializeObject(this.TinderUserInfoDB);
+				String TinderUserInfoJson = Newtonsoft.Json.JsonConvert.SerializeObject(TinderUserInfoDB);
 				DefaultController SentJson = new DefaultController();
-				SentJson.Post(TinderUserInfoJson);
+				// SentJson.Post(TinderUserInfoJson);
 
 
 				//DataTable dt = new DataTable();
-				//Console.WriteLine(this.TinderUserInfoDB.Tables["tinderuserinfo"].Rows[0]["age"]);
-				/*foreach (DataRow pRow in this.TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
+				//Console.WriteLine(TinderUserInfoDB.Tables["tinderuserinfo"].Rows[0]["age"]);
+				/*foreach (DataRow pRow in TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
 				{
 
 					Console.WriteLine("{0}, {1}", pRow["age"], pRow["id"]);
@@ -51,11 +51,11 @@ namespace Tinder
 				Console.WriteLine("ERROR: " + me.Message);
 			}
 
-			return this.TinderUserInfoDB;
+			return TinderUserInfoDB;
 		}
 
 		//sign upして送られてきたデータをdatabaseに格納
-		public static void INSERT_DATA(person data)
+		 public static void INSERT_DATA(person data)
 		{
 			try
 			{
@@ -120,12 +120,12 @@ namespace Tinder
 
 		//データベースからランダムでSELECT
 		//ランダム関数を使ってIDを決定する。ランダム値は最古IDから最新IDの中で発生(自分のIDも含まれてしまう可能性もあるがそれはまた後で)
-		public void SELECT_RND()
+		  public static void SELECT_RND()
 		{
-			this.RetriveWholeDB();
+			RetriveWholeDB();
 
 			List<DateTime> IDs = new List<DateTime>();
-			foreach (DataRow pRow in this.TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
+			foreach (DataRow pRow in TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
 			{
 				IDs.Add((DateTime)pRow["id"]);
 			}
@@ -142,7 +142,7 @@ namespace Tinder
 		}
 
 		//いいねをカウントアップする関数 defaultcontrollerから引数IDを取得して該当するデータを変更する。
-		public  void INSERT_THUMBS(int id)
+		public static void INSERT_THUMBS(int id)
 		{
 			//SQL conection
 			//SQL 引数のID を使って 該当のデータのいいね数を+1でupdate 
@@ -156,9 +156,9 @@ namespace Tinder
 				// コネクション作成
 				MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
 				int LikeCount = 0; // 初期化
-				this.RetriveWholeDB();
-				Console.WriteLine(this.TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["username"]);
-				foreach (DataRow pRow in this.TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
+				RetriveWholeDB();
+				Console.WriteLine(TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["username"]);
+				foreach (DataRow pRow in TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
 				{
 					if ((string)pRow["username"] == username)
 					{
