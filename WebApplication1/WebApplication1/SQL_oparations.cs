@@ -110,7 +110,7 @@ namespace Tinder
 
 		//データベースからランダムでSELECT
 		//ランダム関数を使ってIDを決定する。ランダム値は最古IDから最新IDの中で発生(自分のIDも含まれてしまう可能性もあるがそれはまた後で)
-		  public static void SELECT_RND()
+		  public static DateTime SELECT_RND()
 		{
 			RetriveWholeDB();
 
@@ -127,12 +127,12 @@ namespace Tinder
 			// ....
 			Console.WriteLine(Selectedid); // 選ばれた人のidを出力
 
-
+			return Selectedid;
 
 		}
 
 		//いいねをカウントアップする関数 defaultcontrollerから引数IDを取得して該当するデータを変更する。
-		public static void INSERT_THUMBS(int id)
+		public static void INSERT_THUMBS(DateTime Datetimeid)
 		{
 			//SQL conection
 			//SQL 引数のID を使って 該当のデータのいいね数を+1でupdate 
@@ -140,8 +140,7 @@ namespace Tinder
 
 			try
 			{   // 特定の名前の人の言い値数をユーザ名(できたらid)で取得する
-				// idでの指定が上手くいかないかもしれないのでprimary keyをユーザ名に変更するかもしれません.
-				string username = "test"; // ここに++1したいユーザ名を格納
+				
 
 				// コネクション作成
 				MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
@@ -150,19 +149,20 @@ namespace Tinder
 				Console.WriteLine(TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["username"]);
 				foreach (DataRow pRow in TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
 				{
-					if ((string)pRow["username"] == username)
+					var hoge = pRow["id"];
+					if ((DateTime)pRow["id"] == Datetimeid)
 					{
 						LikeCount = (int)(pRow["liked"]);
+						break;
 					}
 				}
 
 
-
 				// testというユーザの言い値を現在のいいね数+1に変更する処理
 				// コマンドを作成
-				MySqlCommand cmd = new MySqlCommand("update tinderuserinfo set liked=@liked where username=@username", cn);
+				MySqlCommand cmd = new MySqlCommand("update tinderuserinfo set liked=@liked where id=@datetimeidid", cn);
 				// パラメータ設定
-				cmd.Parameters.Add(new MySqlParameter("username", username));
+				cmd.Parameters.Add(new MySqlParameter("datetimeidid", Datetimeid));
 				int AfterLiked = LikeCount + 1;
 				cmd.Parameters.Add(new MySqlParameter("liked", AfterLiked));
 				// オープン
@@ -179,7 +179,7 @@ namespace Tinder
 			}
 
 
-		}
+		  }
 
 
 
