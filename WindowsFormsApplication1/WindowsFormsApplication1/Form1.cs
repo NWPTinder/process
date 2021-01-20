@@ -26,8 +26,8 @@ namespace WindowsFormsApplication1
         private void button4_Click(object sender, EventArgs e)
         {
             Data uuu = function.Get();
-            textBox5.Text = uuu.username;
-            textBox6.Text = uuu.id.ToString();
+            Name_display.Text = uuu.username;
+            Age_display.Text = uuu.id.ToString();
            
         }
 
@@ -39,6 +39,11 @@ namespace WindowsFormsApplication1
         private void richTextBox3_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
