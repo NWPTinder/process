@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -25,6 +26,10 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         public HttpResponseMessage GetUser()
         {
+            DataSet Ranking_info = new DataSet();
+            SQL_oparations.SELECT_RANK();
+            
+
             person test = new person();
             // person User = SQL_oparations.Select_user()
             test.id = 2001;
