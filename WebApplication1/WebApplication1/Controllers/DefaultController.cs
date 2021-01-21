@@ -26,8 +26,8 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         public HttpResponseMessage GetUser()
         {
-            DataSet Ranking_info = new DataSet();
-            SQL_oparations.SELECT_RANK();
+            //DataSet Ranking_info = new DataSet();
+            //SQL_oparations.SELECT_RANK();
             
 
             person test = new person();
@@ -73,6 +73,32 @@ namespace WebApplication1.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public HttpResponseMessage GetRanking()
+        {
+            //DataSet Ranking_info = new DataSet();
+            //SQL_oparations.SELECT_RANK();
+            DataSet Ranking_info = SQL_oparations.SELECT_Ranking();
+
+            /*
+            person test = new person();
+            // person User = SQL_oparations.Select_user()
+            test.id = 2001;
+            test.username = "testname";
+            test.age = 100;
+            test.sex = true;
+            test.whoami = "こんにちわこんにちわこんち庭こんわちわ";
+            test.liked = 0;
+            */
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(Ranking_info);
+            HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
+            res.Content = new StringContent(json, Encoding.UTF8, "application/json");
+            return res;
+        }
+
 
         // POST: api/Default
 
@@ -81,13 +107,10 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <param name="singup_user"></param>
         /// <returns></returns>
-        public HttpResponseMessage Post([FromBody] person singup_user)
+        public void Post([FromBody] person singup_user)
         {
 
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(singup_user);
-            HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
-            res.Content = new StringContent(json , Encoding.UTF8, "application/json");
-            return res;
+            SQL_oparations.INSERT_DATA(singup_user);
         }
 
         // PUT: api/Default/5

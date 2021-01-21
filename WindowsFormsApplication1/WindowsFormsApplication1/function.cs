@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -60,6 +61,24 @@ namespace WindowsFormsApplication1
             aaa = JsonConvert.DeserializeObject<Person>(response.Content);
             return aaa;
         }
+
+        public static DataSet Get_Ranking()
+        {
+            // Create Client&RestRequest
+            var client = new RestClient();
+            var request = new RestRequest();
+            string URL = "https://localhost:44346/api/default/GetRanking/";
+            //URL Setting
+            client.BaseUrl = new Uri(URL);
+            request.Method = Method.GET;
+            var response = client.Execute(request);
+            bool isOK = response.StatusCode == HttpStatusCode.OK;
+            DataSet Ranking_info = new DataSet();
+
+            Ranking_info = JsonConvert.DeserializeObject<DataSet>(response.Content);
+            return Ranking_info;
+        }
+
 
     }
 }

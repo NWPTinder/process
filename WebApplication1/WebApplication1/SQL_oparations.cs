@@ -59,11 +59,11 @@ namespace Tinder
 				// パラメータ設定
 				// 実際には取得した値が入ります。
 				cmd.Parameters.Add(new MySqlParameter("id", DateTime.Now)); // Primary key として時刻を選択
-				cmd.Parameters.Add(new MySqlParameter("username", "test"));
-				cmd.Parameters.Add(new MySqlParameter("age", 1));
-				cmd.Parameters.Add(new MySqlParameter("sex", 1)); // man : 1 woman : 0
-				cmd.Parameters.Add(new MySqlParameter("whoami", "test"));
-				cmd.Parameters.Add(new MySqlParameter("liked", 1));
+				cmd.Parameters.Add(new MySqlParameter("username", data.username));
+				cmd.Parameters.Add(new MySqlParameter("age", data.age));
+				cmd.Parameters.Add(new MySqlParameter("sex", data.sex)); // man : 1 woman : 0
+				cmd.Parameters.Add(new MySqlParameter("whoami", data.whoami));
+				cmd.Parameters.Add(new MySqlParameter("liked", data.liked));
 
 				// オープン
 				cmd.Connection.Open();
@@ -83,7 +83,7 @@ namespace Tinder
 		//何人まで取得するか検討中
 		//返り値をstring(json)型にするか、person型にするか決定してません。
 		// person型にするならコレクションとかを使ってperson型の配列のような物を作るのがよいかと思います。
-		public static DataSet SELECT_RANK()
+		public static DataSet SELECT_Ranking()
 		{
 			DataSet RankingByLike5 = new DataSet();
 			try
@@ -182,6 +182,7 @@ namespace Tinder
 
 
 		  }
+
 
 
 

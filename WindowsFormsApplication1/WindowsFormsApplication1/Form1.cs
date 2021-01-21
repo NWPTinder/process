@@ -26,6 +26,8 @@ namespace WindowsFormsApplication1
             Description_display.Text = display_user.whoami;
             ID_display.Text = display_user.id.ToString();
 
+            dataGridView_Ranking.DataSource = function.Get_Ranking();
+
         }
 
 
