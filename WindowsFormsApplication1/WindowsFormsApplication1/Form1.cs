@@ -38,7 +38,8 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void Thumbup_button_Click(object sender, EventArgs e)
         {
-            int IINE_ID = Convert.ToInt32(ID_display.Text);
+            string IINE_ID = ID_display.Text;
+
             Person display_user = new Person();
             display_user = function.GET_IINE(IINE_ID);
             Name_display.Text = display_user.username;

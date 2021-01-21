@@ -45,12 +45,12 @@ namespace WindowsFormsApplication1
             return aaa;
         }
 
-        public static Person GET_IINE(int ID)
+        public static Person GET_IINE(string ID)
         {
             // Create Client&RestRequest
             var client = new RestClient();
             var request = new RestRequest();
-            string URL = "https://localhost:44346/api/default/Getuser/"+ ID;
+            string URL = "https://localhost:44346/api/default/Get_IINE/"+ "?ID=" + ID ;
             //URL Setting
             client.BaseUrl = new Uri(URL);
             request.Method = Method.GET;

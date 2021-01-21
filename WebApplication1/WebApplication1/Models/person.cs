@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class person
+    public class Person
     {
         /*
          CREATE TABLE tinderuserinfo
@@ -30,7 +30,7 @@ namespace WebApplication1.Models
         ///<summary>
         ///Jusho
         ///</summary>
-        public long id { get; set; }
+        public DateTime id { get; set; }
         public string username { get; set; }
         public int age { get; set; }
         public bool sex { get; set; } // man : 1, woman : 0 (is_man : 1, isnot_man : 0)
@@ -38,7 +38,7 @@ namespace WebApplication1.Models
         public int liked { get; set; }
         
         // 値をセットする関数、Javaだと書く必要があるけどC#だったら便利なものがありそう
-        public void Seter(long id, string username, int age, bool sex, string whoami, int liked)
+        public void Seter(DateTime id, string username, int age, bool sex, string whoami, int liked)
         {
             this.id = id;
             this.username = username;
