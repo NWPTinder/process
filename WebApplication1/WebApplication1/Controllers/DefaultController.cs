@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -15,40 +16,52 @@ namespace WebApplication1.Controllers
     public class DefaultController : ApiController
     {
         // GET: api/Default
-        
+
         [HttpGet]
-        [Route("Def")]
-        //public HttpResponseMessage Get()
-        public HttpResponseMessage Def()
+        /// <summary>
+        /// パラメータのない GET メソッドに対応するメソッド 
+        /// 更新がかかったときなどに適当なuserを取得
+        /// 例：GET /api/default/GetUser
+        /// </summary>
+        /// <returns></returns>
+        public HttpResponseMessage GetUser()
         {
-            // ######### テスト用の関数です。Staticなのでメソッドに直接アクセスでき言い値数が++1になっていることを　#########
-            // ######### 確認できるはずです #########
-            SQL_oparations.INSERT_THUMBS(11);
-            // ############## ######
-            person data = new person();
-            data.username = "aaa";
-            data.id = 1;
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            //DataSet Ranking_info = new DataSet();
+            //SQL_oparations.SELECT_RANK();
+            
+
+            Person test = new Person();
+            // person User = SQL_oparations.Select_user()
+            test.id = DateTime.Now;
+            test.username = "testname";
+            test.age = 100;
+            test.sex = true;
+            test.whoami = "こんにちわこんにちわこんち庭こんわちわ";
+            test.liked = 0;
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(test);
             HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
             res.Content = new StringContent(json, Encoding.UTF8, "application/json");
             return res;
         }
 
-        //GET:  api/Defaul/test
-        public HttpResponseMessage Test()
+
+
+        /// <summary>
+        /// id パラメータのある GETメソッドに対応するメソッド
+        /// 例：/api/default/GetUser/4
+        /// いいねされたときに使います。Getuserのパラメータにint型のIDが入力されたとき、該当のIDに対するカウントアップとランダムで別のIDuserを出力。
+        /// </summary>
+        /// <returns></returns>
+        public HttpResponseMessage Get_IINE(String ID)
         {
             {
-                person test = new person();
-                test.id = 20010430;
-                test.username = "testname";
-                test.age = 100;
-                test.sex = true;
-                test.whoami = "whoami";
-                test.liked = 0;
-
-
                 
-                string json = Newtonsoft.Json.JsonConvert.SerializeObject(test);
+                
+                Person Selection_id = new Person();
+
+                SQL_oparations.SELECT_user(DateTime.Parse(ID));
+
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(Selection_id);
                 HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
                 res.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -56,22 +69,30 @@ namespace WebApplication1.Controllers
             }
         }
 
-
-
-        // GET: api/Default/5
-        public string Get(int id)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public HttpResponseMessage GetRanking()
         {
-            return "value";
+            DataSet Ranking_info = SQL_oparations.SELECT_Ranking();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(Ranking_info);
+            HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
+            res.Content = new StringContent(json, Encoding.UTF8, "application/json");
+            return res;
         }
 
-        // POST: api/Default
-        public HttpResponseMessage Post([FromBody] string value)
-        {
 
-            //string json = Newtonsoft.Json.JsonConvert.SerializeObject(value);
-            HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
-            res.Content = new StringContent(value, Encoding.UTF8, "application/json");
-            return res;
+        // POST: api/Default
+
+        /// <summary>
+        /// 例：/api/default/Post
+        /// </summary>
+        /// <param name="singup_user"></param>
+        /// <returns></returns>
+        public void Post([FromBody] Person singup_user)
+        {
+            SQL_oparations.INSERT_DATA(singup_user);
         }
 
         // PUT: api/Default/5
