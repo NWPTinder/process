@@ -26,19 +26,10 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         public HttpResponseMessage GetUser()
         {
-            //DataSet Ranking_info = new DataSet();
-            //SQL_oparations.SELECT_RANK();
+            SQL_oparations.SELECT_user(SQL_oparations.SELECT_RND());
+            Person Selection_id = SQL_oparations.SELECT_user(SQL_oparations.SELECT_RND());
             
-
-            Person test = new Person();
-            // person User = SQL_oparations.Select_user()
-            test.id = DateTime.Now;
-            test.username = "testname";
-            test.age = 100;
-            test.sex = true;
-            test.whoami = "こんにちわこんにちわこんち庭こんわちわ";
-            test.liked = 0;
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(test);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(Selection_id);
             HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
             res.Content = new StringContent(json, Encoding.UTF8, "application/json");
             return res;
@@ -56,10 +47,10 @@ namespace WebApplication1.Controllers
         {
             {
                 
-                
-                Person Selection_id = new Person();
+                SQL_oparations.INSERT_THUMBS(DateTime.Parse(ID));
+                SQL_oparations.SELECT_user(SQL_oparations.SELECT_RND());
 
-                SQL_oparations.SELECT_user(DateTime.Parse(ID));
+                Person Selection_id = SQL_oparations.SELECT_user(SQL_oparations.SELECT_RND());
 
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(Selection_id);
                 HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
