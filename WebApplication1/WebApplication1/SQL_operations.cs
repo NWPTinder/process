@@ -196,7 +196,7 @@ namespace Tinder
 			// コネクション作成
 			MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
 			RetriveWholeDB();
-			MySqlCommand cmd = new MySqlCommand("SELECT * FROM tinderuserinfo", cn);
+			MySqlCommand cmd = new MySqlCommand("SELECT * FROM tinderuserinfo ORDER BY RAND() LIMIT 1", cn);
 			//cmd.Parameters.Add(new MySqlParameter("id", id)); // Primary key として時刻を選択
 			// オープン
 			cmd.Connection.Open();
@@ -205,16 +205,19 @@ namespace Tinder
 			adapter.Fill(table);
 			// クローズ
 			cmd.Connection.Close();
+			var MaxRowCount = table.Rows.Count;
+			Random Randomfanc = new System.Random();
 
+			int RandomRowNum = (Randomfanc.Next(0, MaxRowCount+1));
 			table.TableName = "tinderusername";
 
 			var user = new Person();
-			user.id = (DateTime)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["id"];
-			user.username = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["username"];
-			user.age = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["age"];
-			//user.sex = (bool)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["sex"];
-			user.whoami = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["whoami"];
-			user.liked = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["liked"];
+			user.id = (DateTime)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["id"];
+			user.username = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["username"];
+			user.age = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["age"];
+			 user.sex = true;
+			user.whoami = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["whoami"];
+			user.liked = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["liked"];
 
 			return user;
 		}
