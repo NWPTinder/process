@@ -93,9 +93,9 @@ namespace Tinder
 				 "Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
 
 				// Likedが大きい順に並べて上位5人まで出力する
-				MySqlDataAdapter FirstAdapter = new MySqlDataAdapter("SELECT* FROM tinderuserinfo ORDER BY liked DESC LIMIT 5", cn);
+				MySqlDataAdapter FirstAdapter = new MySqlDataAdapter("SELECT * FROM tinderuserinfo ORDER BY liked DESC LIMIT 5", cn);
 				// SELECT* FROM tinderuserinfo ORDER BY liked DESC LIMIT 3;
-
+				
 				FirstAdapter.Fill(RankingByLike5, "tinderuserinfo"); // 出力結果をDatasetに格納
 
 				// とりあえず、Dataset型にしておいたのでPerson型にするかjsonにするかお任せします。 
@@ -186,17 +186,17 @@ namespace Tinder
 
 		}
 
+		// public static Person SELECT_user(DateTime outid) // コンフリクト修正のためコメントアウトさせていただきます
 		public static Person SELECT_user(DateTime id)
 		{
 
 			var table = new DataTable();
-			// 特定の名前の人の言い値数をユーザ名(できたらid)で取得する
 
 
 			// コネクション作成
 			MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
 			RetriveWholeDB();
-			MySqlCommand cmd = new MySqlCommand("SELECT * FROM tinderuserinfo ORDER BY RAND() LIMIT 1", cn);
+			MySqlCommand cmd = new MySqlCommand("SELECT * FROM tinderuserinfo", cn);
 			//cmd.Parameters.Add(new MySqlParameter("id", id)); // Primary key として時刻を選択
 			// オープン
 			cmd.Connection.Open();
@@ -208,14 +208,14 @@ namespace Tinder
 			var MaxRowCount = table.Rows.Count;
 			Random Randomfanc = new System.Random();
 
-			int RandomRowNum = (Randomfanc.Next(0, MaxRowCount+1));
+			int RandomRowNum = (Randomfanc.Next(0, MaxRowCount + 1));
 			table.TableName = "tinderusername";
 
 			var user = new Person();
 			user.id = (DateTime)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["id"];
 			user.username = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["username"];
 			user.age = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["age"];
-			 user.sex = true;
+			user.sex = true;
 			user.whoami = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["whoami"];
 			user.liked = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["liked"];
 

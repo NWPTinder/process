@@ -20,14 +20,15 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             Person display_user = new Person();
-            display_user = function.Get();
-            Name_display.Text = display_user.username;
-            Age_display.Text = display_user.age.ToString();
-            Description_display.Text = display_user.whoami;
-            ID_display.Text = display_user.id.ToString();
-
-            dataGridView_Ranking.DataSource = function.Get_Ranking();
-
+            
+            if((display_user = function.Get()) != null)
+            {
+                Name_display.Text = display_user.username;
+                Age_display.Text = display_user.age.ToString();
+                Description_display.Text = display_user.whoami;
+                ID_display.Text = display_user.id.ToString();
+                //dataGridView_Ranking.DataSource = function.Get_Ranking();
+            }
         }
 
 
@@ -39,13 +40,14 @@ namespace WindowsFormsApplication1
         private void Thumbup_button_Click(object sender, EventArgs e)
         {
             string IINE_ID = ID_display.Text;
-
             Person display_user = new Person();
-            display_user = function.GET_IINE(IINE_ID);
-            Name_display.Text = display_user.username;
-            Age_display.Text = display_user.age.ToString();
-            Description_display.Text = display_user.whoami;
-            ID_display.Text = display_user.id.ToString();
+            if ((display_user = function.GET_IINE(IINE_ID)) != null)
+            {
+                Name_display.Text = display_user.username;
+                Age_display.Text = display_user.age.ToString();
+                Description_display.Text = display_user.whoami;
+                ID_display.Text = display_user.id.ToString();
+            } 
         }
 
         /// <summary>
@@ -67,11 +69,16 @@ namespace WindowsFormsApplication1
         private void Update_button_Click(object sender, EventArgs e)
         {
             Person display_user = new Person();
-            display_user = function.Get();
-            Name_display.Text = display_user.username;
-            Age_display.Text = display_user.age.ToString();
-            Description_display.Text = display_user.whoami;
-            ID_display.Text = display_user.id.ToString();
+
+            if ((display_user = function.Get()) != null)
+            {
+                Name_display.Text = display_user.username;
+                Age_display.Text = display_user.age.ToString();
+                Description_display.Text = display_user.whoami;
+                ID_display.Text = display_user.id.ToString();
+            }
+            
+
         }
 
 
