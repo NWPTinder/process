@@ -20,8 +20,11 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             Person display_user = new Person();
-            
-            if((display_user = function.Get()) != null)
+            //RenewTopicPerson();
+            Client FirtstC = new Client();
+            FirtstC.Connect();
+            FirtstC.Send("gaga");
+            if ((display_user = function.Get()) != null)
             {
                 Name_display.Text = display_user.username;
                 Age_display.Text = display_user.age.ToString();
@@ -79,6 +82,12 @@ namespace WindowsFormsApplication1
             }
             
 
+        }
+
+        public void RenewTopicPerson()
+        {
+            SocketClient.SendMsgSeter("RenewTopicPerson");
+            SocketClient.SoketMain();
         }
 
 

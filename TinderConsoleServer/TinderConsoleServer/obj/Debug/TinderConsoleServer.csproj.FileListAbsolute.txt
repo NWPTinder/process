@@ -1,0 +1,7 @@
+C:\Users\spec2\source\repos\TinderConsoleServer\TinderConsoleServer\bin\Debug\TinderConsoleServer.exe.config
+C:\Users\spec2\source\repos\TinderConsoleServer\TinderConsoleServer\bin\Debug\TinderConsoleServer.exe
+C:\Users\spec2\source\repos\TinderConsoleServer\TinderConsoleServer\bin\Debug\TinderConsoleServer.pdb
+C:\Users\spec2\source\repos\TinderConsoleServer\TinderConsoleServer\obj\Debug\TinderConsoleServer.csprojAssemblyReference.cache
+C:\Users\spec2\source\repos\TinderConsoleServer\TinderConsoleServer\obj\Debug\TinderConsoleServer.csproj.CoreCompileInputs.cache
+C:\Users\spec2\source\repos\TinderConsoleServer\TinderConsoleServer\obj\Debug\TinderConsoleServer.exe
+C:\Users\spec2\source\repos\TinderConsoleServer\TinderConsoleServer\obj\Debug\TinderConsoleServer.pdb
