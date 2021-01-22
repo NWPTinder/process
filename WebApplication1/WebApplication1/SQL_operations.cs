@@ -16,16 +16,21 @@ namespace Tinder
 {
 	public class SQL_oparations
 	{
+		// エラー処理ができないが、簡潔に書ける
+		static readonly MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
+
 		static DataSet TinderUserInfoDB = new DataSet(); // DBのすべての内容を格納する変数
-														 //private  DataSet RetriveWholeDB(object sender, EventArgs e)
+
+		//private  DataSet RetriveWholeDB(object sender, EventArgs e)
 		public static DataSet RetriveWholeDB()
 		{
 			//// MySQLへの接続
 			try
 			{
 				// コネクション作成
-				MySqlConnection cn = new MySqlConnection(
-				 "Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
+				/* コネクション作成を共通のものに変更してみる
+				MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
+				*/
 				MySqlDataAdapter FirstAdapter = new MySqlDataAdapter(
 				 "SELECT * FROM tinderuserinfo", cn);
 				// SELECT* FROM tinderuserinfo ORDER BY liked DESC LIMIT 3;
@@ -50,9 +55,10 @@ namespace Tinder
 			try
 			{
 				// コネクション作成
+				/* コネクション作成を共通のものに変更してみる
 				MySqlConnection cn = new MySqlConnection(
 				 "Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
-
+				*/
 				// コマンドを作成
 				MySqlCommand cmd =
 					new MySqlCommand("insert into tinderuserinfo values (@id, @username, @age, @sex, @whoami, @liked )", cn);
@@ -89,13 +95,14 @@ namespace Tinder
 			try
 			{
 				// コネクション作成
+				/* コネクション作成を共通のものに変更してみる
 				MySqlConnection cn = new MySqlConnection(
 				 "Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
-
+				*/
 				// Likedが大きい順に並べて上位5人まで出力する
 				MySqlDataAdapter FirstAdapter = new MySqlDataAdapter("SELECT * FROM tinderuserinfo ORDER BY liked DESC LIMIT 5", cn);
 				// SELECT* FROM tinderuserinfo ORDER BY liked DESC LIMIT 3;
-				
+
 				FirstAdapter.Fill(RankingByLike5, "tinderuserinfo"); // 出力結果をDatasetに格納
 
 				// とりあえず、Dataset型にしておいたのでPerson型にするかjsonにするかお任せします。 
@@ -114,16 +121,18 @@ namespace Tinder
 		//ランダム関数を使ってIDを決定する。ランダム値は最古IDから最新IDの中で発生(自分のIDも含まれてしまう可能性もあるがそれはまた後で)
 		public static DateTime SELECT_RND()
 		{
-			RetriveWholeDB();
+			int Count = 0;
+			Count = (int)RetriveWholeDB().Tables["tinderuserinfo"].Rows.Count;
 
-			List<DateTime> IDs = new List<DateTime>();
-			foreach (DataRow pRow in TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
-			{
-				IDs.Add((DateTime)pRow["id"]);
-			}
+			// idのリストを生成
+			//List<DateTime> IDs = new List<DateTime>();
+			//foreach (DataRow pRow in TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
+			//{
+			//	IDs.Add((DateTime)pRow["id"]);
+			//}
 
 			Random RandomNum = new System.Random();
-			int Selector = RandomNum.Next(0, IDs.Count());
+			int Selector = RandomNum.Next(0, Count - 1);
 			DateTime Selectedid = (DateTime)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[Selector]["id"];
 			var SelectedUserName = TinderUserInfoDB.Tables["tinderuserinfo"].Rows[Selector]["username"];
 			// ....
@@ -145,7 +154,9 @@ namespace Tinder
 
 
 				// コネクション作成
+				/* コネクション作成を共通のものに変更してみる
 				MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
+				*/
 				int LikeCount = 0; // 初期化
 				RetriveWholeDB();
 				Console.WriteLine(TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["username"]);
@@ -194,7 +205,9 @@ namespace Tinder
 
 
 			// コネクション作成
+			/* コネクション作成を共通のものに変更してみる
 			MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
+			*/
 			RetriveWholeDB();
 			MySqlCommand cmd = new MySqlCommand("SELECT * FROM tinderuserinfo", cn);
 			//cmd.Parameters.Add(new MySqlParameter("id", id)); // Primary key として時刻を選択
@@ -211,17 +224,38 @@ namespace Tinder
 			int RandomRowNum = (Randomfanc.Next(0, MaxRowCount + 1));
 			table.TableName = "tinderusername";
 
-			var user = new Person();
-			user.id = (DateTime)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["id"];
-			user.username = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["username"];
-			user.age = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["age"];
-			user.sex = true;
-			user.whoami = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["whoami"];
-			user.liked = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["liked"];
+			Person user = new Person();
+			//user.id = (DateTime)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["id"];
+			//user.username = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["username"];
+			//user.age = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["age"];
+			//user.sex = true;
+			//user.whoami = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["whoami"];
+			//user.liked = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["liked"];
+			var OnePersonInfo = TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum];
+			user.Seter((DateTime)OnePersonInfo["id"], (string)OnePersonInfo["username"], (int)OnePersonInfo["age"], (bool)OnePersonInfo["sex"], (string)OnePersonInfo["whoami"], (int)OnePersonInfo["liked"]);
+
 
 			return user;
 		}
 
+		// エラー処理をする接続
+		//public static void ConnectDB()
+		//{
+		//	//// MySQLへの接続
+		//	try
+		//	{
+		//		// コネクション作成
+		//		MySqlConnection cn = new MySqlConnection(
+		//		 "Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
+
+		//	}
+		//	catch (MySqlException me)
+		//	{
+		//		Console.WriteLine("ERROR: " + me.Message);
+		//	}
+
+		//}
 	}
+
 }
 
