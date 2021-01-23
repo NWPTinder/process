@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -48,7 +49,7 @@ public class Client
     // 非同期受信のコールバックメソッド(別スレッドで実行される)
     private void ReceiveCallback(IAsyncResult asyncResult)
     {
-        //var socket = asyncResult.AsyncState as Socket;
+        var socket = asyncResult.AsyncState as Socket;
         var byteSize = -1;
         try
         {
@@ -77,9 +78,18 @@ public class Client
     public void SetRenewDisplyaName(string ReveveMsg)
     {        
         Person Info = JsonSerializer.Deserialize<Person>(ReveveMsg);
-        DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
         //DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
-        
+        File.AppendAllText(@"‪tanaka.txt", ReveveMsg);
+        DisPlayName.id = Info.id;
+        DisPlayName.username = Info.username;
+        DisPlayName.age = Info.age;
+        DisPlayName.sex = Info.sex;
+        DisPlayName.whoami = Info.whoami;
+        DisPlayName.liked = Info.liked;
+
+
+        //DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
+
 
     }
 }

@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
             Client FirtstC = new Client();
             FirtstC.Connect();
             FirtstC.Send(SeterSignalPersonJson);
-            System.Threading.Thread.Sleep(3000);
+            //System.Threading.Thread.Sleep(3000);
             Application.Run(new Form1());
         }
     }

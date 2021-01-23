@@ -11,16 +11,16 @@ namespace WindowsFormsApplication1
     {
 
 
-        public static string Signal; // 指示内容を格納する
-        public static string username;
-        public static DateTime id;
-        public static int age;
-        public static bool sex;// man : 1(True)
-        public static string whoami;
-        public static int liked;
-        public static bool Type;
+        public static string Signal { get; set; }  // 指示内容を格納する
+        public static string username { get; set; }
+        public static DateTime id { get; set; }
+        public static int age { get; set; }
+        public static bool sex { get; set; } // man : 1(True)
+        public static string whoami { get; set; }
+        public static int liked { get; set; }
+        public static bool Type { get; set; }
 
-        
+
         // 値をセットする関数、Javaだと書く必要があるけどC#だったら便利なものがありそう
         public static void Seter(DateTime idd, string usernamee, int agee, bool sexe, string whoamie, int likede)
         {
