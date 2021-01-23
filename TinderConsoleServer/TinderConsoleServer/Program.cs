@@ -12,6 +12,7 @@ namespace TinderConsoleServer
         {
             Server FirstSoket = new Server(59072);
             FirstSoket.Run();
+           
 
         }
    

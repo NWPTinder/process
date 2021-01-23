@@ -6,6 +6,8 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 namespace TinderConsoleServer
 {
     class Server
@@ -88,11 +90,26 @@ namespace TinderConsoleServer
             if (bytes > 0)
             {
                 // 受信した文字列を表示
-                var content = Encoding.UTF8.GetString(state.Buffer, 0, bytes);
+                var content = Encoding.UTF8.GetString(state.Buffer, 0, bytes); // 受信した<type>Person 
                 Console.WriteLine($"受信データ: {content} [{state.ClientSocket.RemoteEndPoint}]");
 
+                Person JsonToPerson = new Person();
+                JsonToPerson = JsonSerializer.Deserialize<Person>(content);
+                string json=null;
+                Person hoge = SQL_oparations.SELECT_user(DateTime.Now);
+                //hoge.Seter(DateTime.Now, "taa",23, true, "gagag", 3);
+                if (JsonToPerson.Signal == "RenewDisplayname")
+                {
+                //    //SQL_oparations.SELECT_user();
+                json = JsonSerializer.Serialize(hoge);
+                //content = JsonSerializer.Serialize(hoge);
+                }
+
+
                 // 受信文字列を接続中全クライアントに送信。
-                SendAllClient(content);
+                Console.WriteLine($"送信データ: {json} ");
+                SendAllClient(json);
+
 
                 // 受信時のコードバック処理を再設定
                 clientSocket.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReceiveCallback), state);

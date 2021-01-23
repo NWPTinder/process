@@ -79,7 +79,7 @@ public class Client
     {        
         Person Info = JsonSerializer.Deserialize<Person>(ReveveMsg);
         //DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
-        File.AppendAllText(@"‪tanaka.txt", ReveveMsg);
+        //File.AppendAllText(@"‪tanaka.txt", ReveveMsg);
         DisPlayName.id = Info.id;
         DisPlayName.username = Info.username;
         DisPlayName.age = Info.age;
