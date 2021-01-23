@@ -2,6 +2,11 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using WindowsFormsApplication1;
 
 public class Client
 {
@@ -9,6 +14,7 @@ public class Client
     private Socket Socket { get; set; }
     public const int BufferSize = 1024;
     public byte[] Buffer { get; } = new byte[BufferSize];
+    
 
     public Client()
     {
@@ -42,26 +48,38 @@ public class Client
     // 非同期受信のコールバックメソッド(別スレッドで実行される)
     private void ReceiveCallback(IAsyncResult asyncResult)
     {
-        var socket = asyncResult.AsyncState as Socket;
-
+        //var socket = asyncResult.AsyncState as Socket;
         var byteSize = -1;
         try
         {
+
             // 受信を待機
-            byteSize = socket.EndReceive(asyncResult);
+            byteSize = this.Socket.EndReceive(asyncResult);
         }
         catch (Exception ex)
         {
+            
             //Console.WriteLine(ex.Message);
-            return;
         }
 
         // 受信したデータがある場合、その内容を表示する
         // 再度非同期での受信を開始する
+        string hoge = "aa";
         if (byteSize > 0)
         {
-            //({Encoding.UTF8.GetString(this.Buffer, 0, byteSize));
-            socket.BeginReceive(this.Buffer, 0, this.Buffer.Length, SocketFlags.None, ReceiveCallback, socket);
+            var ReveveMsg = (Encoding.UTF8.GetString(this.Buffer, 0, byteSize));
+            SetRenewDisplyaName(ReveveMsg);
+           
         }
+        return;
+    }
+
+    public void SetRenewDisplyaName(string ReveveMsg)
+    {        
+        Person Info = JsonSerializer.Deserialize<Person>(ReveveMsg);
+        DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
+        //DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
+        
+
     }
 }

@@ -16,22 +16,35 @@ namespace WindowsFormsApplication1
         /// フォーム展開時、ランダムなUser表示
         /// &ランキング更新
         /// </summary>
+        /// 
+        static string hoge;
         public Form1()
         {
             InitializeComponent();
             Person display_user = new Person();
             //RenewTopicPerson();
+
+            // require a sent json
+            Person SeterSignalPerson = new Person();
+            SeterSignalPerson.SeterSignal("RenewDisplayname");
+            var SeterSignalPersonJson = SeterSignalPerson.IntoJson(SeterSignalPerson);
             Client FirtstC = new Client();
-            FirtstC.Connect();
-            FirtstC.Send("gaga");
-            if ((display_user = function.Get()) != null)
-            {
-                Name_display.Text = display_user.username;
-                Age_display.Text = display_user.age.ToString();
-                Description_display.Text = display_user.whoami;
-                ID_display.Text = display_user.id.ToString();
+            FirtstC.Connect();    
+            FirtstC.Send(SeterSignalPersonJson);
+            System.Threading.Thread.Sleep(3000);
+            
+            var hoge = DisPlayName.username;
+            //FirtstC.DisConnect();
+
+
+            //if ((display_user = function.Get()) != null)
+            //{
+                Name_display.Text = DisPlayName.username;
+                Age_display.Text = DisPlayName.age.ToString();
+                Description_display.Text = DisPlayName.whoami;
+                ID_display.Text = DisPlayName.id.ToString();
                 //dataGridView_Ranking.DataSource = function.Get_Ranking();
-            }
+            //}
         }
 
 
@@ -72,13 +85,34 @@ namespace WindowsFormsApplication1
         private void Update_button_Click(object sender, EventArgs e)
         {
             Person display_user = new Person();
-
+           
             if ((display_user = function.Get()) != null)
             {
                 Name_display.Text = display_user.username;
                 Age_display.Text = display_user.age.ToString();
                 Description_display.Text = display_user.whoami;
                 ID_display.Text = display_user.id.ToString();
+
+
+                // require a sent json
+                Person SeterSignalPerson = new Person();
+                SeterSignalPerson.SeterSignal("RenewDisplayname");
+                var SeterSignalPersonJson = SeterSignalPerson.IntoJson(SeterSignalPerson);
+                Client FirtstC = new Client();
+                FirtstC.Connect();
+                FirtstC.Send(SeterSignalPersonJson);
+                // System.Threading.Thread.Sleep(3000);
+
+                var hoge = DisPlayName.username;
+                //FirtstC.DisConnect();
+
+
+                //if ((display_user = function.Get()) != null)
+                //{
+                Name_display.Text = DisPlayName.username;
+                Age_display.Text = DisPlayName.age.ToString();
+                Description_display.Text = DisPlayName.whoami;
+                ID_display.Text = DisPlayName.id.ToString();
             }
             
 
@@ -90,6 +124,18 @@ namespace WindowsFormsApplication1
             SocketClient.SoketMain();
         }
 
+        private void Description_display_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void Name_display_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void SetDisplyUserName()
+        {
+            
+        }
     }
 }

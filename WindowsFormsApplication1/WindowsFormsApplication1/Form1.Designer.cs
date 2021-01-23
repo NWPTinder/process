@@ -58,7 +58,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(34, 62);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 15);
+            this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 9;
             this.label5.Text = "名前";
             // 
@@ -66,14 +66,15 @@
             // 
             this.Name_display.Location = new System.Drawing.Point(36, 77);
             this.Name_display.Name = "Name_display";
-            this.Name_display.Size = new System.Drawing.Size(227, 22);
+            this.Name_display.Size = new System.Drawing.Size(227, 19);
             this.Name_display.TabIndex = 10;
+            this.Name_display.TextChanged += new System.EventHandler(this.Name_display_TextChanged);
             // 
             // Age_display
             // 
             this.Age_display.Location = new System.Drawing.Point(299, 77);
             this.Age_display.Name = "Age_display";
-            this.Age_display.Size = new System.Drawing.Size(27, 22);
+            this.Age_display.Size = new System.Drawing.Size(27, 19);
             this.Age_display.TabIndex = 11;
             // 
             // label6
@@ -81,7 +82,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(297, 62);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 15);
+            this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 12;
             this.label6.Text = "年齢";
             // 
@@ -92,13 +93,14 @@
             this.Description_display.Size = new System.Drawing.Size(398, 78);
             this.Description_display.TabIndex = 13;
             this.Description_display.Text = "";
+            this.Description_display.TextChanged += new System.EventHandler(this.Description_display_TextChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(34, 112);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 15);
+            this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 14;
             this.label7.Text = "自己紹介";
             // 
@@ -107,7 +109,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(658, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(169, 15);
+            this.label2.Size = new System.Drawing.Size(136, 12);
             this.label2.TabIndex = 16;
             this.label2.Text = "新規登録・プロフィール更新";
             // 
@@ -184,7 +186,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(54, 425);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 15);
+            this.label1.Size = new System.Drawing.Size(50, 12);
             this.label1.TabIndex = 19;
             this.label1.Text = "UserのID";
             // 
@@ -193,7 +195,7 @@
             this.ID_display.AutoSize = true;
             this.ID_display.Location = new System.Drawing.Point(115, 425);
             this.ID_display.Name = "ID_display";
-            this.ID_display.Size = new System.Drawing.Size(0, 15);
+            this.ID_display.Size = new System.Drawing.Size(0, 12);
             this.ID_display.TabIndex = 20;
             // 
             // Form1
