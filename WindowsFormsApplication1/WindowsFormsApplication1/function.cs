@@ -33,13 +33,13 @@ namespace WindowsFormsApplication1
             // Create Client&RestRequest
             var client = new RestClient();
             var request = new RestRequest();
-            string URL = "https://localhost:44346/api/default/Getuser/";
+            string URL = "https://localhost:44346/api/default/GetUser/";
             //URL Setting
             client.BaseUrl = new Uri(URL);
             request.Method = Method.GET;
             var response = client.Execute(request);
             bool isOK = response.StatusCode == HttpStatusCode.OK;
-            Person aaa = new Person();
+            Person aaa = new Person(); // ローカルで変数しているからスコープがメソッドの中だけになっている
             
             aaa = JsonConvert.DeserializeObject<Person>(response.Content);
             return aaa;

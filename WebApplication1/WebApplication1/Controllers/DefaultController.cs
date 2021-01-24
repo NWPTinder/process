@@ -26,10 +26,28 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         public HttpResponseMessage GetUser()
         {
-            SQL_oparations.SELECT_user(SQL_oparations.SELECT_RND());
-            Person Selection_id = SQL_oparations.SELECT_user(SQL_oparations.SELECT_RND());
+            // SQL_oparations.SELECT_user(SQL_oparations.SELECT_RND());
+            // Person Selection_id = SQL_oparations.SELECT_user(SQL_oparations.SELECT_RND());
             
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(Selection_id);
+
+            Person test = new Person();
+            Person User = SQL_oparations.SELECT_user(SQL_oparations.SELECT_RND());
+
+            test.id = User.id;
+            test.username = User.username;
+            test.age = User.age;
+            test.sex = true; // ここだけ指定なし一次エラー回避
+            test.whoami = User.whoami;
+            test.liked = User.liked;
+
+            // person User = SQL_oparations.Select_user()
+            // test.id = DateTime.Now;
+            // test.username = "testname";
+            // test.age = 100;
+            // test.sex = true;
+            // test.whoami = "こんにちわこんにちわこんち庭こんわちわ";
+            // test.liked = 0;
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(test);
             HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK);
             res.Content = new StringContent(json, Encoding.UTF8, "application/json");
             return res;
