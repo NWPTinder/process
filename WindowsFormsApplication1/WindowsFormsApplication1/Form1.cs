@@ -29,7 +29,7 @@ namespace WindowsFormsApplication1
                 ID_display.Text = display_user.id.ToString();
                 var Ranking_Dataset = function.Get_Ranking();
                 DataTable Ranking_Table = new DataTable();
-                Ranking_Dataset.Tables.Add(Ranking_Table);
+                Ranking_Table = Ranking_Dataset.Tables["tinderuserinfo"];
                 dataGridView_Ranking.DataSource = Ranking_Table;
             }
         }
@@ -50,6 +50,10 @@ namespace WindowsFormsApplication1
                 Age_display.Text = display_user.age.ToString();
                 Description_display.Text = display_user.whoami;
                 ID_display.Text = display_user.id.ToString();
+                var Ranking_Dataset = function.Get_Ranking();
+                DataTable Ranking_Table = new DataTable();
+                Ranking_Table = Ranking_Dataset.Tables["tinderuserinfo"];
+                dataGridView_Ranking.DataSource = Ranking_Table;
             } 
         }
 
@@ -79,6 +83,10 @@ namespace WindowsFormsApplication1
                 Age_display.Text = display_user.age.ToString();
                 Description_display.Text = display_user.whoami;
                 ID_display.Text = display_user.id.ToString();
+                var Ranking_Dataset = function.Get_Ranking();
+                DataTable Ranking_Table = new DataTable();
+                Ranking_Table = Ranking_Dataset.Tables["tinderuserinfo"];
+                dataGridView_Ranking.DataSource = Ranking_Table;
             }
             
 

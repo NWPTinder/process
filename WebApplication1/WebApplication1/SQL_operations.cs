@@ -79,22 +79,21 @@ namespace Tinder
 		// person型にするならコレクションとかを使ってperson型の配列のような物を作るのがよいかと思います。
 		public static DataSet SELECT_Ranking()
 		{
-			DataSet RankingByLike5 = new DataSet();
+			DataSet RankingByLike = new DataSet();
 			try
 			{
 				// Likedが大きい順に並べて上位5人まで出力する
-				MySqlDataAdapter FirstAdapter = new MySqlDataAdapter("SELECT * FROM tinderuserinfo ORDER BY liked DESC LIMIT 5", cn);
+				MySqlDataAdapter FirstAdapter = new MySqlDataAdapter("SELECT * FROM tinderuserinfo ORDER BY liked DESC", cn);
 				// SELECT* FROM tinderuserinfo ORDER BY liked DESC LIMIT 3;
 
-				FirstAdapter.Fill(RankingByLike5, "tinderuserinfo"); // 出力結果をDatasetに格納
-				// とりあえず、Dataset型にしておいたのでPerson型にするかjsonにするかお任せします。 
+				FirstAdapter.Fill(RankingByLike, "tinderuserinfo"); // 出力結果をDatasetに格納
 			}
 			catch (MySqlException me)
 			{
 				Console.WriteLine("ERROR: " + me.Message);
 			}
 
-			return RankingByLike5;
+			return RankingByLike;
 		}
 
 

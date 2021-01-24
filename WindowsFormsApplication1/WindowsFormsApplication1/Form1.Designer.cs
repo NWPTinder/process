@@ -42,12 +42,6 @@
             this.Thumbup_button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.ID_display = new System.Windows.Forms.Label();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Ranking)).BeginInit();
             this.SuspendLayout();
@@ -59,38 +53,40 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(34, 62);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(33, 75);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.Size = new System.Drawing.Size(41, 20);
             this.label5.TabIndex = 9;
             this.label5.Text = "名前";
             // 
             // Name_display
             // 
-            this.Name_display.Location = new System.Drawing.Point(36, 77);
+            this.Name_display.Location = new System.Drawing.Point(37, 102);
             this.Name_display.Name = "Name_display";
             this.Name_display.Size = new System.Drawing.Size(227, 20);
             this.Name_display.TabIndex = 10;
             // 
             // Age_display
             // 
-            this.Age_display.Location = new System.Drawing.Point(299, 77);
+            this.Age_display.Location = new System.Drawing.Point(318, 102);
             this.Age_display.Name = "Age_display";
-            this.Age_display.Size = new System.Drawing.Size(27, 20);
+            this.Age_display.Size = new System.Drawing.Size(57, 20);
             this.Age_display.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(297, 62);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(297, 72);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.Size = new System.Drawing.Size(48, 24);
             this.label6.TabIndex = 12;
             this.label6.Text = "年齢";
             // 
             // Description_display
             // 
-            this.Description_display.Location = new System.Drawing.Point(36, 127);
+            this.Description_display.Location = new System.Drawing.Point(37, 183);
             this.Description_display.Name = "Description_display";
             this.Description_display.Size = new System.Drawing.Size(398, 78);
             this.Description_display.TabIndex = 13;
@@ -99,31 +95,26 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(34, 112);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(32, 155);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.Size = new System.Drawing.Size(96, 25);
             this.label7.TabIndex = 14;
             this.label7.Text = "自己紹介";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(658, 38);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(628, 47);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(138, 13);
+            this.label2.Size = new System.Drawing.Size(240, 25);
             this.label2.TabIndex = 16;
             this.label2.Text = "新規登録・プロフィール更新";
             // 
             // dataGridView_Ranking
             // 
             this.dataGridView_Ranking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Ranking.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6});
             this.dataGridView_Ranking.Location = new System.Drawing.Point(587, 183);
             this.dataGridView_Ranking.Name = "dataGridView_Ranking";
             this.dataGridView_Ranking.RowHeadersWidth = 51;
@@ -135,7 +126,7 @@
             // 
             this.Registration_button.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.touroku1;
             this.Registration_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Registration_button.Location = new System.Drawing.Point(660, 62);
+            this.Registration_button.Location = new System.Drawing.Point(682, 75);
             this.Registration_button.Name = "Registration_button";
             this.Registration_button.Size = new System.Drawing.Size(132, 99);
             this.Registration_button.TabIndex = 15;
@@ -167,49 +158,22 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 425);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(30, 371);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.Size = new System.Drawing.Size(163, 42);
             this.label1.TabIndex = 19;
             this.label1.Text = "UserのID";
             // 
             // ID_display
             // 
             this.ID_display.AutoSize = true;
-            this.ID_display.Location = new System.Drawing.Point(115, 425);
+            this.ID_display.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ID_display.Location = new System.Drawing.Point(100, 422);
             this.ID_display.Name = "ID_display";
-            this.ID_display.Size = new System.Drawing.Size(0, 13);
+            this.ID_display.Size = new System.Drawing.Size(113, 37);
             this.ID_display.TabIndex = 20;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Column3";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Column4";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Column5";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Column6";
-            this.Column6.Name = "Column6";
+            this.ID_display.Text = "読込中";
             // 
             // Form1
             // 
@@ -251,12 +215,6 @@
         private System.Windows.Forms.DataGridView dataGridView_Ranking;
         private System.Windows.Forms.Label ID_display;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }
 
