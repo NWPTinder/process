@@ -45,6 +45,7 @@
             this.Thumbup_button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.ID_display = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Ranking)).BeginInit();
             this.SuspendLayout();
@@ -107,7 +108,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(658, 38);
+            this.label2.Location = new System.Drawing.Point(606, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(136, 12);
             this.label2.TabIndex = 16;
@@ -153,7 +154,7 @@
             // 
             this.Registration_button.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.touroku1;
             this.Registration_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Registration_button.Location = new System.Drawing.Point(660, 62);
+            this.Registration_button.Location = new System.Drawing.Point(596, 62);
             this.Registration_button.Name = "Registration_button";
             this.Registration_button.Size = new System.Drawing.Size(132, 99);
             this.Registration_button.TabIndex = 15;
@@ -199,9 +200,21 @@
             this.ID_display.Size = new System.Drawing.Size(0, 12);
             this.ID_display.TabIndex = 20;
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.reload1;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Location = new System.Drawing.Point(794, 62);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(104, 99);
+            this.button1.TabIndex = 21;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(943, 496);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.ID_display);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView_Ranking);
@@ -243,6 +256,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.Label ID_display;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -25,6 +25,7 @@ namespace WindowsFormsApplication1
             Person display_user = new Person();
             SetDisplyUserName();
             
+            
             //}
         }
 
@@ -36,10 +37,12 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void Thumbup_button_Click(object sender, EventArgs e)
         {
-            Person SeterSignalPerson = new Person();
-            SeterSignalPerson.SeterSignal("OneUPLike");
-            SeterSignalPerson.Seter(DisPlayName.id, DisPlayName.username, DisPlayName.age, DisPlayName.sex, DisPlayName.whoami, DisPlayName.liked);
-            var SeterSignalPersonJson = SeterSignalPerson.IntoJson(SeterSignalPerson);
+            Bottom SeterSignalPerson = new Bottom();
+            string inisialization = "{\"tinderuserinfo\":[{\"id\":\"2018/05/01\",\"username\":\"htaa\",\"age\":11,\"sex\":true,\"whoami\":\"wgafai\",\"liked\":12}]}";
+            SeterSignalPerson = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(inisialization);
+            SeterSignalPerson.tinderuserinfo[0].SeterSignal("OneUPLike");
+            SeterSignalPerson.tinderuserinfo[0].Seter(DisPlayName.id, DisPlayName.username, DisPlayName.age, DisPlayName.sex, DisPlayName.whoami, DisPlayName.liked);
+            var SeterSignalPersonJson = Newtonsoft.Json.JsonConvert.SerializeObject(SeterSignalPerson);
             Client FirtstC = new Client();
             FirtstC.Connect();
             FirtstC.Send(SeterSignalPersonJson);
@@ -64,8 +67,9 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void Update_button_Click(object sender, EventArgs e)
         {
-            //SetDisplyUserName();
-            GetRanking();
+            
+            SetDisplyUserName();
+            
             dataGridView_Ranking.Refresh();
 
         }
@@ -85,10 +89,10 @@ namespace WindowsFormsApplication1
         {
 
         }
+
         // Randomで表示する人を更新する関数
         private void SetDisplyUserName()
         {
-
 
             // require a sent json
             Bottom SeterSignalPerson = new Bottom();
@@ -108,7 +112,6 @@ namespace WindowsFormsApplication1
                 Console.WriteLine("NULL");
             }
 
-            //SeterSignalPerson.SeterSignal("RenewDisplayname");
             var SeterSignalPersonJson = Newtonsoft.Json.JsonConvert.SerializeObject(SeterSignalPerson);
             //var SeterSignalPersonJson = SeterSignalPerson.IntoJson(SeterSignalPerson);
             Client FirtstC = new Client();
@@ -144,7 +147,7 @@ namespace WindowsFormsApplication1
 
         private void dataGridView_Ranking_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-  
+            //GetRanking();
 
         }
         private void GetRanking() 
@@ -168,5 +171,11 @@ namespace WindowsFormsApplication1
             dataGridView_Ranking.Rows.Add(Ranking.username3, Ranking.age3, Ranking.liked3);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GetRanking();
+        }
     }
+
 }
+

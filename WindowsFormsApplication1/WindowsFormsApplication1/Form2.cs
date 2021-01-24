@@ -20,36 +20,57 @@ namespace WindowsFormsApplication1
 
         private void Completion_button_Click(object sender, EventArgs e)
         {
-            Person singup_user = new Person();
-            singup_user.age = (int)Enter_age.Value;
-            singup_user.username = Enter_name.Text;
-            singup_user.whoami = Enter_description.Text;
+            Bottom AddUser = new Bottom();
+            string inisialization = "{\"tinderuserinfo\":[{\"id\":\"2018/05/01\",\"username\":\"AddUser\",\"age\":11,\"sex\":true,\"whoami\":\"wgafai\",\"liked\":0}]}";
+            AddUser = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(inisialization);
+
+            AddUser.tinderuserinfo[0].Signal = "AddUser";
+            AddUser.tinderuserinfo[0].id = DateTime.Now;
+            AddUser.tinderuserinfo[0].age = (int)Enter_age.Value;
+            AddUser.tinderuserinfo[0].username = Enter_name.Text;
+            AddUser.tinderuserinfo[0].whoami = Enter_description.Text;
             if (Select_male.Checked == true)
             {
-                singup_user.sex = true;
+                AddUser.tinderuserinfo[0].sex = true;
             }
             else
             {
-                singup_user.sex = false;
+                AddUser.tinderuserinfo[0].sex = false;
             }
- 
-            function.Post(singup_user);
+
+            SendAddUser(AddUser);
+            //AddUser.tinderuserinfo[0];
+            //function.Post(singup_user);
             this.Close();
         }
 
-        /*
-        private void button1_Click(object sender, EventArgs e)
+        // Randomで表示する人を更新する関数
+        private void SendAddUser(Bottom AddUser)
         {
-            Person button1_Click_char  = new Person();
-            button1_Click_char.Seter((long)Enter_age.Value, Enter_name.Text, 10, true, "hoge", 2);
 
-            if (Select_male != null) button1_Click_char.Type = true;
-            function.Post(button1_Click_char);
-            this.Close();
+            // 初期化
+            Bottom SeterSignalPerson = new Bottom();
+            string inisialization = "{\"tinderuserinfo\":[{\"id\":\"2018/05/01\",\"username\":\"htaa\",\"age\":11,\"sex\":true,\"whoami\":\"wgafai\",\"liked\":12}]}";
+            SeterSignalPerson = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(inisialization);
+
+            var ResisteredUser = AddUser.tinderuserinfo[0];
+            try
+            {
+                SeterSignalPerson.tinderuserinfo[0].Signal = "AddUser";
+                SeterSignalPerson.tinderuserinfo[0].Seter(ResisteredUser.id, ResisteredUser.username, ResisteredUser.age, ResisteredUser.sex, ResisteredUser.whoami, ResisteredUser.liked);
+            }
+            catch
+            {
+                Console.WriteLine("NULL");
+            }
+
+            var SeterSignalPersonJson = Newtonsoft.Json.JsonConvert.SerializeObject(SeterSignalPerson);
+            //var SeterSignalPersonJson = SeterSignalPerson.IntoJson(SeterSignalPerson);
+            Client FirtstC = new Client();
+            FirtstC.Connect();
+            FirtstC.Send(SeterSignalPersonJson);
         }
-        */
+
 
     }
-
-    
 }

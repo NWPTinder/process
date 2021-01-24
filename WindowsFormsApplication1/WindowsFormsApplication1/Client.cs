@@ -76,15 +76,17 @@ public class Client
             var ReveveMsg = (Encoding.UTF8.GetString(this.Buffer, 0, byteSize));
 
 
-            Root root = new Root();
-            root = (Newtonsoft.Json.JsonConvert.DeserializeObject<Root>(ReveveMsg));
+            Bottom root = new Bottom();
+            root = (Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(ReveveMsg));
 
             if (root.tinderuserinfo.Count > 1)
             {
                 SetRankingData(root);
             }
             else {
+                if(root.tinderuserinfo[0].Signal == "SelectOneuser") { 
                 SetRenewDisplyaName(ReveveMsg);
+                }
             }
         }
         return;
@@ -105,7 +107,7 @@ public class Client
         //DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
     }
 
-    public void SetRankingData(Root RankingData)
+    public void SetRankingData(Bottom RankingData)
     {
 
         Ranking.username1 = RankingData.tinderuserinfo[0].username;
