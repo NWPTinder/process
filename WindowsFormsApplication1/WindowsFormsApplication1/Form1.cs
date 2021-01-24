@@ -27,7 +27,10 @@ namespace WindowsFormsApplication1
                 Age_display.Text = display_user.age.ToString();
                 Description_display.Text = display_user.whoami;
                 ID_display.Text = display_user.id.ToString();
-                //dataGridView_Ranking.DataSource = function.Get_Ranking();
+                var Ranking_Dataset = function.Get_Ranking();
+                DataTable Ranking_Table = new DataTable();
+                Ranking_Dataset.Tables.Add(Ranking_Table);
+                dataGridView_Ranking.DataSource = Ranking_Table;
             }
         }
 

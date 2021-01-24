@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
 using System.Text;
-
 using WebApplication1.Models;
 using Tinder;
 
