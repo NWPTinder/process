@@ -126,6 +126,7 @@
             this.dataGridView_Ranking.RowTemplate.Height = 21;
             this.dataGridView_Ranking.Size = new System.Drawing.Size(344, 276);
             this.dataGridView_Ranking.TabIndex = 17;
+            this.dataGridView_Ranking.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Ranking_CellContentClick);
             // 
             // Column1
             // 
@@ -215,6 +216,7 @@
             this.Controls.Add(this.Update_button);
             this.Controls.Add(this.Thumbup_button);
             this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Ranking)).EndInit();
             this.ResumeLayout(false);

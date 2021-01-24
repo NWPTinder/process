@@ -83,6 +83,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ranking.cs" />
+    <Compile Include="tinderuserinfo.cs" />
     <Compile Include="DisPlayName.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Form1.cs">

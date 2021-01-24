@@ -7,20 +7,14 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1
 {
+    public class Bottom
+    {
+        public List<Person> tinderuserinfo { get; set; }
+       
+    }
+    
     public class Person
     {
-        /*
-        CREATE TABLE tinderuserinfo
-(
-    id INTEGER NOT NULL,
-    username VARCHAR(30) NOT NULL,
-    age INTEGER,
-    sex TINYINT,
-    whoami VARCHAR(400),
-    liked INTEGER,
-    PRIMARY KEY(id)
-);
-            */
 
         public string Signal { get; set; } // 指示内容を格納する
         public string username { get; set; }
@@ -30,10 +24,11 @@ namespace WindowsFormsApplication1
         public string whoami { get; set; }
         public int liked { get; set; }
         public bool Type { get; internal set; }
-        
 
-        // 値をセットする関数、Javaだと書く必要があるけどC#だったら便利なものがありそう
-        public void Seter(DateTime id, string username, int age, bool sex, string whoami, int liked)
+
+
+    // 値をセットする関数、Javaだと書く必要があるけどC#だったら便利なものがありそう
+    public void Seter(DateTime id, string username, int age, bool sex, string whoami, int liked)
         {
             this.id = id;
             this.username = username;

@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1
         public static string whoami { get; set; }
         public static int liked { get; set; }
         public static bool Type { get; set; }
-
+        public static List<string> Ranking = new List<string>();
 
         // 値をセットする関数、Javaだと書く必要があるけどC#だったら便利なものがありそう
         public static void Seter(DateTime idd, string usernamee, int agee, bool sexe, string whoamie, int likede)
@@ -31,6 +31,8 @@ namespace WindowsFormsApplication1
             whoami = whoamie;
             liked = likede;
         }
+
+
 
         // 値をセットする関数、Javaだと書く必要があるけどC#だったら便利なものがありそう
         public static void SeterSignal(string signal)

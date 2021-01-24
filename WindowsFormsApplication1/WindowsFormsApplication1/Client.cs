@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -7,7 +9,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using WindowsFormsApplication1;
+using System.Data;
+using Newtonsoft.Json.Linq;
 
 public class Client
 {
@@ -65,31 +70,54 @@ public class Client
 
         // 受信したデータがある場合、その内容を表示する
         // 再度非同期での受信を開始する
-        string hoge = "aa";
+        
         if (byteSize > 0)
         {
             var ReveveMsg = (Encoding.UTF8.GetString(this.Buffer, 0, byteSize));
-            SetRenewDisplyaName(ReveveMsg);
-           
+
+
+            Root root = new Root();
+            root = (Newtonsoft.Json.JsonConvert.DeserializeObject<Root>(ReveveMsg));
+
+            if (root.tinderuserinfo.Count > 1)
+            {
+                SetRankingData(root);
+            }
+            else {
+                SetRenewDisplyaName(ReveveMsg);
+            }
         }
         return;
     }
 
     public void SetRenewDisplyaName(string ReveveMsg)
     {        
-        Person Info = JsonSerializer.Deserialize<Person>(ReveveMsg);
+        var Info = Newtonsoft.Json.JsonConvert.DeserializeObject<Root>(ReveveMsg);
         //DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
         //File.AppendAllText(@"‪tanaka.txt", ReveveMsg);
-        DisPlayName.id = Info.id;
-        DisPlayName.username = Info.username;
-        DisPlayName.age = Info.age;
-        DisPlayName.sex = Info.sex;
-        DisPlayName.whoami = Info.whoami;
-        DisPlayName.liked = Info.liked;
-
+        DisPlayName.id = Info.tinderuserinfo[0].id;
+        DisPlayName.username = Info.tinderuserinfo[0].username;
+        DisPlayName.age = Info.tinderuserinfo[0].age;
+        DisPlayName.sex = Info.tinderuserinfo[0].sex;
+        DisPlayName.whoami = Info.tinderuserinfo[0].whoami;
+        DisPlayName.liked = Info.tinderuserinfo[0].liked;
 
         //DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
+    }
 
+    public void SetRankingData(Root RankingData)
+    {
 
+        Ranking.username1 = RankingData.tinderuserinfo[0].username;
+        Ranking.username2 = RankingData.tinderuserinfo[1].username;
+        Ranking.username3 = RankingData.tinderuserinfo[2].username;
+        Ranking.age1 = RankingData.tinderuserinfo[0].age;
+        Ranking.age2 = RankingData.tinderuserinfo[1].age;
+        Ranking.age3 = RankingData.tinderuserinfo[2].age;
+        Ranking.liked1 = RankingData.tinderuserinfo[0].liked;
+        Ranking.liked2 = RankingData.tinderuserinfo[1].liked;
+        Ranking.liked3 = RankingData.tinderuserinfo[2].liked;
+
+        //DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
     }
 }
