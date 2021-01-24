@@ -10,6 +10,7 @@ using MySql.Data.MySqlClient;
 
 //using Windows.UI.Xaml.Controls;
 using System.Windows;
+using System.Text.Json;
 
 namespace TinderConsoleServer
 {
@@ -35,7 +36,6 @@ namespace TinderConsoleServer
 				// SELECT* FROM tinderuserinfo ORDER BY liked DESC LIMIT 3;
 				FirstAdapter.Fill(TinderUserInfoDB, "tinderuserinfo");
 				
-
 			}
 			catch (MySqlException me)
 			{
@@ -46,7 +46,7 @@ namespace TinderConsoleServer
 		}
 
 		//sign upして送られてきたデータをdatabaseに格納
-		public static void INSERT_DATA(Person data)
+		public static void INSERT_DATA(Bottom data)
 		{
 			try
 			{
@@ -60,12 +60,12 @@ namespace TinderConsoleServer
 					new MySqlCommand("insert into tinderuserinfo values (@id, @username, @age, @sex, @whoami, @liked )", cn);
 				// パラメータ設定
 				// 実際には取得した値が入ります。
-				cmd.Parameters.Add(new MySqlParameter("id", DateTime.Now)); // Primary key として時刻を選択
-				cmd.Parameters.Add(new MySqlParameter("username", data.username));
-				cmd.Parameters.Add(new MySqlParameter("age", data.age));
-				cmd.Parameters.Add(new MySqlParameter("sex", data.sex)); // man : 1 woman : 0
-				cmd.Parameters.Add(new MySqlParameter("whoami", data.whoami));
-				cmd.Parameters.Add(new MySqlParameter("liked", data.liked));
+				cmd.Parameters.Add(new MySqlParameter("id", data.tinderuserinfo[0].id)); // Primary key として時刻を選択
+				cmd.Parameters.Add(new MySqlParameter("username", data.tinderuserinfo[0].username));
+				cmd.Parameters.Add(new MySqlParameter("age", data.tinderuserinfo[0].age));
+				cmd.Parameters.Add(new MySqlParameter("sex", data.tinderuserinfo[0].sex)); // man : 1 woman : 0
+				cmd.Parameters.Add(new MySqlParameter("whoami", data.tinderuserinfo[0].whoami));
+				cmd.Parameters.Add(new MySqlParameter("liked", data.tinderuserinfo[0].liked));
 
 				// オープン
 				cmd.Connection.Open();
@@ -85,8 +85,9 @@ namespace TinderConsoleServer
 		//何人まで取得するか検討中
 		//返り値をstring(json)型にするか、person型にするか決定してません。
 		// person型にするならコレクションとかを使ってperson型の配列のような物を作るのがよいかと思います。
-		public static DataSet SELECT_Ranking()
+		public static string SELECT_Ranking()
 		{
+			string jsonstr = null;
 			DataSet RankingByLike5 = new DataSet();
 			try
 			{
@@ -101,15 +102,18 @@ namespace TinderConsoleServer
 
 				FirstAdapter.Fill(RankingByLike5, "tinderuserinfo"); // 出力結果をDatasetに格納
 
-				// とりあえず、Dataset型にしておいたのでPerson型にするかjsonにするかお任せします。 
-
+				// とりあえず、Dataset型にしておいたのでPerson型にするかjsonにするかお任せします。
+				Person temp = new Person();
+				var JsonfiveRank = Newtonsoft.Json.JsonConvert.SerializeObject(RankingByLike5);
+				jsonstr = JsonfiveRank;
+				Person.Ranking = RankingByLike5;
 			}
 			catch (MySqlException me)
 			{
 				Console.WriteLine("ERROR: " + me.Message);
 			}
 
-			return RankingByLike5;
+			return jsonstr;
 		}
 
 
@@ -155,23 +159,33 @@ namespace TinderConsoleServer
 				
 				int LikeCount = 0; // 初期化
 				RetriveWholeDB();
-				Console.WriteLine(TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["username"]);
+				//Console.WriteLine(TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["username"]);
+				int i = 0;
 				foreach (DataRow pRow in TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
 				{
+					
 					var hoge = pRow["id"];
 					if ((DateTime)pRow["id"] == Datetimeid)
 					{
 						LikeCount = (int)(pRow["liked"]);
+						
 						break;
+						
 					}
+					i = i + 1;
 				}
 
 
 				// testというユーザの言い値を現在のいいね数+1に変更する処理
 				// コマンドを作成
-				MySqlCommand cmd = new MySqlCommand("update tinderuserinfo set liked=@liked where id=@datetimeidid", cn);
+				MySqlCommand cmd = new MySqlCommand("update tinderuserinfo set liked=@liked where username=@username", cn);
 				// パラメータ設定
-				cmd.Parameters.Add(new MySqlParameter("datetimeidid", Datetimeid));
+			
+				string username = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(i)]["username"];
+				
+				
+				// IDだとうまく行かないためユーザ名での指定に変更する(粗悪なDBのせいで正常に動作する確立が低い)
+				cmd.Parameters.Add(new MySqlParameter("username", username));
 				int AfterLiked = LikeCount + 1;
 				cmd.Parameters.Add(new MySqlParameter("liked", AfterLiked));
 				// オープン
@@ -194,7 +208,7 @@ namespace TinderConsoleServer
 		}
 
 		// public static Person SELECT_user(DateTime outid) // コンフリクト修正のためコメントアウトさせていただきます
-		public static Person SELECT_user(DateTime id)
+		public static Bottom SELECT_user(DateTime id)
 		{
 
 			var table = new DataTable();
@@ -220,15 +234,12 @@ namespace TinderConsoleServer
 			int RandomRowNum = (Randomfanc.Next(0, MaxRowCount + 1));
 			table.TableName = "tinderusername";
 
-			Person user = new Person();
-			//user.id = (DateTime)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["id"];
-			//user.username = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["username"];
-			//user.age = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["age"];
-			//user.sex = true;
-			//user.whoami = (string)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["whoami"];
-			//user.liked = (int)TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum]["liked"];
+			Bottom user = new Bottom();
+
 			var OnePersonInfo = TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum];
-			user.Seter((DateTime)OnePersonInfo["id"], (string)OnePersonInfo["username"], (int)OnePersonInfo["age"], (bool)OnePersonInfo["sex"], (string)OnePersonInfo["whoami"], (int)OnePersonInfo["liked"]);
+			string inisialization = "{\"tinderuserinfo\":[{\"id\":\"2018/05/01\",\"username\":\"htaa\",\"age\":11,\"sex\":true,\"whoami\":\"wgafai\",\"liked\":0}]}";
+			user = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(inisialization);
+			user.tinderuserinfo[0].Seter((DateTime)OnePersonInfo["id"], (string)OnePersonInfo["username"], (int)OnePersonInfo["age"], (bool)OnePersonInfo["sex"], (string)OnePersonInfo["whoami"], (int)OnePersonInfo["liked"]);
 
 
 			return user;

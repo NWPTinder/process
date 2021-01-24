@@ -93,22 +93,13 @@ namespace TinderConsoleServer
                 var content = Encoding.UTF8.GetString(state.Buffer, 0, bytes); // 受信した<type>Person 
                 Console.WriteLine($"受信データ: {content} [{state.ClientSocket.RemoteEndPoint}]");
 
-                Person JsonToPerson = new Person();
-                JsonToPerson = JsonSerializer.Deserialize<Person>(content);
-                string json=null;
-                Person hoge = SQL_oparations.SELECT_user(DateTime.Now);
-                //hoge.Seter(DateTime.Now, "taa",23, true, "gagag", 3);
-                if (JsonToPerson.Signal == "RenewDisplayname")
-                {
-                //    //SQL_oparations.SELECT_user();
-                json = JsonSerializer.Serialize(hoge);
-                //content = JsonSerializer.Serialize(hoge);
-                }
 
+                // 受け取った情報に対してそれぞれに異なる返信を用意する
+                string Translatedjson = JudegeSignal(content);
 
                 // 受信文字列を接続中全クライアントに送信。
-                Console.WriteLine($"送信データ: {json} ");
-                SendAllClient(json);
+                Console.WriteLine($"送信データ: {Translatedjson} ");
+                SendAllClient(Translatedjson);
 
 
                 // 受信時のコードバック処理を再設定
@@ -126,8 +117,15 @@ namespace TinderConsoleServer
         private void Send(Socket clientSocket, String data)
         {
             // 受信データをUTF8文字列に変換し送信
-            var bytes = Encoding.UTF8.GetBytes(data);
-            clientSocket.BeginSend(bytes, 0, bytes.Length, 0, new AsyncCallback(SendCallback), clientSocket);
+            try {
+             
+                    var bytes = Encoding.UTF8.GetBytes(data);
+                    clientSocket.BeginSend(bytes, 0, bytes.Length, 0, new AsyncCallback(SendCallback), clientSocket);
+               
+            }catch {
+                Console.WriteLine("Null Exception");
+            }
+            
         }
 
         // 送信時のコールバック処理
@@ -153,6 +151,70 @@ namespace TinderConsoleServer
             {
                 Send(clientSocket, data);
             }
+        }
+
+        private string JudegeSignal(string content) 
+        {
+            // 初期化
+            Bottom JsonToPerson = new Bottom();
+            string inisialization = "{\"tinderuserinfo\":[{\"id\":\"2018/05/01\",\"username\":\"htaa\",\"age\":11,\"sex\":true,\"whoami\":\"wgafai\",\"liked\":12}]}";
+            JsonToPerson = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(inisialization);
+            
+            // 受信情報をBottomへ変換
+            JsonToPerson = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(content);
+
+            string json = "{\"tinderuserinfo\":[{\"id\":\"2018/05/01\",\"username\":\"komatsu\",\"age\":11,\"sex\":true,\"whoami\":\"wgafai\",\"liked\":12}]}";
+
+
+            string flag = "other";
+            try
+            {
+                flag = JsonToPerson.tinderuserinfo[0].Signal.ToString();
+            }
+            catch 
+            {
+                Console.WriteLine("NULL");
+            }
+            
+
+            //hoge.Seter(DateTime.Now, "taa",23, true, "gagag", 3);
+            if (flag == "RenewDisplayname")
+            {
+                Bottom hoge = SQL_oparations.SELECT_user(DateTime.Now);
+                hoge.tinderuserinfo[0].Signal = "SelectOneuser";
+                json = JsonSerializer.Serialize(hoge);
+                //content = JsonSerializer.Serialize(hoge);
+            }
+            else if (flag == "OneUPLike")
+            {
+                Bottom temp = new Bottom();
+                temp = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(json);
+                temp.tinderuserinfo[0].Signal = "OneUPLike";
+                json = Newtonsoft.Json.JsonConvert.SerializeObject(temp);
+                SQL_oparations.INSERT_THUMBS(JsonToPerson.tinderuserinfo[0].id);
+
+            }
+            else if (flag == "Ranking")
+            {
+                Bottom temp = new Bottom();
+                
+                json = SQL_oparations.SELECT_Ranking();
+                temp = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(json);
+                temp.tinderuserinfo[0].Signal = "Ranking";
+                json = Newtonsoft.Json.JsonConvert.SerializeObject(temp);
+
+            }
+            else if (flag == "AddUser")
+            {
+                Bottom temp = new Bottom();
+                temp = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(json);
+                temp.tinderuserinfo[0].Signal = "AddUser";
+                json = Newtonsoft.Json.JsonConvert.SerializeObject(temp);
+                SQL_oparations.INSERT_DATA(JsonToPerson);
+            }
+                
+
+            return json;
         }
     }
 

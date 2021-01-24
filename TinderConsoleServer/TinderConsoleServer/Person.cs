@@ -4,23 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace TinderConsoleServer
 {
+    public class Bottom
+    {
+        public List<Person> tinderuserinfo { get; set; }
+    }
+
     public class Person
     {
-        /*
-        CREATE TABLE tinderuserinfo
-(
-    id INTEGER NOT NULL,
-    username VARCHAR(30) NOT NULL,
-    age INTEGER,
-    sex TINYINT,
-    whoami VARCHAR(400),
-    liked INTEGER,
-    PRIMARY KEY(id)
-);
-            */
+
 
         public string Signal { get; set; } // 指示内容を格納する
         public string username { get; set; }
@@ -30,6 +25,8 @@ namespace TinderConsoleServer
         public string whoami { get; set; }
         public int liked { get; set; }
         public bool Type { get; internal set; }
+        // public static List<Person> Ranking = new List<Person>();
+        public static DataSet Ranking = new DataSet();
 
 
         // 値をセットする関数、Javaだと書く必要があるけどC#だったら便利なものがありそう
