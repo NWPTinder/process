@@ -84,8 +84,15 @@ namespace TinderConsoleServer
             var state = asyncResult.AsyncState as StateObject;
             var clientSocket = state.ClientSocket;
 
+            int bytes;
             // クライアントソケットから受信データを取得終了
-            int bytes = clientSocket.EndReceive(asyncResult);
+            try {
+                bytes = clientSocket.EndReceive(asyncResult);
+            }
+            catch {
+                bytes = 0;
+            }
+
 
             if (bytes > 0)
             {
@@ -107,7 +114,7 @@ namespace TinderConsoleServer
             }
             else
             {
-                // 0バイトデータの受信時は、切断されたとき?
+                // 0バイトデータの受信時は、切断されたとき
                 clientSocket.Close();
                 this.ClientSockets.TryDequeue(out clientSocket);
             }
@@ -157,13 +164,13 @@ namespace TinderConsoleServer
         {
             // 初期化
             Bottom JsonToPerson = new Bottom();
-            string inisialization = "{\"tinderuserinfo\":[{\"id\":\"2018/05/01\",\"username\":\"htaa\",\"age\":11,\"sex\":true,\"whoami\":\"wgafai\",\"liked\":12}]}";
+            string inisialization = "{\"tinderuserinfo\":[{\"id\":\"2020/05/01\",\"username\":\"JudegeSignal\",\"age\":0,\"sex\":true,\"whoami\":\"JudegeSignal\",\"liked\":0}]}";
             JsonToPerson = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(inisialization);
             
             // 受信情報をBottomへ変換
             JsonToPerson = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(content);
 
-            string json = "{\"tinderuserinfo\":[{\"id\":\"2018/05/01\",\"username\":\"komatsu\",\"age\":11,\"sex\":true,\"whoami\":\"wgafai\",\"liked\":12}]}";
+            string json = "{\"tinderuserinfo\":[{\"id\":\"2020/01/01\",\"username\":\"JudegeSignal\",\"age\":0,\"sex\":true,\"whoami\":\"JudegeSignal\",\"liked\":0}]}";
 
 
             string flag = "other";

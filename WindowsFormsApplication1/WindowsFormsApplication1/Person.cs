@@ -51,16 +51,4 @@ namespace WindowsFormsApplication1
             return jsonstr;
 }
     }
-    //public Person Into(string Jsonsring)
-    //{
-    //    // デシリアライズしてDictionaryに戻します。
-    //    var json = JsonSerializer.Deserialize<Person>(Jsonsring);
-    //    //foreach (var item in json)
-    //    //{
-    //    //    System.Diagnostics.Debug.Print("{0}", item.Key);
-    //    //    System.Diagnostics.Debug.Print("{0}", item.Value);
-    //    //}
-    //    return json;
-    //}
-    
 }

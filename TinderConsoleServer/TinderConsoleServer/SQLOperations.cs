@@ -16,7 +16,8 @@ namespace TinderConsoleServer
 {
 	public class SQL_oparations
 	{
-		MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
+		// エラー処理ができないが、簡潔に書ける
+		//static readonly MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
 
 		static DataSet TinderUserInfoDB = new DataSet(); // DBのすべての内容を格納する変数
 
@@ -27,6 +28,7 @@ namespace TinderConsoleServer
 			try
 			{
 				// コネクション作成
+				//コネクション作成を共通のものに変更してみる
 				MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
 				
 				MySqlDataAdapter FirstAdapter = new MySqlDataAdapter(
@@ -81,6 +83,8 @@ namespace TinderConsoleServer
 
 		//ランキング情報を取得する関数
 		//何人まで取得するか検討中
+		//返り値をstring(json)型にするか、person型にするか決定してません。
+		// person型にするならコレクションとかを使ってperson型の配列のような物を作るのがよいかと思います。
 		public static string SELECT_Ranking()
 		{
 			string jsonstr = null;
@@ -98,6 +102,7 @@ namespace TinderConsoleServer
 
 				FirstAdapter.Fill(RankingByLike5, "tinderuserinfo"); // 出力結果をDatasetに格納
 
+				// とりあえず、Dataset型にしておいたのでPerson型にするかjsonにするかお任せします。
 				Person temp = new Person();
 				var JsonfiveRank = Newtonsoft.Json.JsonConvert.SerializeObject(RankingByLike5);
 				jsonstr = JsonfiveRank;
@@ -113,10 +118,18 @@ namespace TinderConsoleServer
 
 
 		//データベースからランダムでSELECT
+		//ランダム関数を使ってIDを決定する。ランダム値は最古IDから最新IDの中で発生(自分のIDも含まれてしまう可能性もあるがそれはまた後で)
 		public static DateTime SELECT_RND()
 		{
 			int Count = 0;
 			Count = (int)RetriveWholeDB().Tables["tinderuserinfo"].Rows.Count;
+
+			// idのリストを生成
+			//List<DateTime> IDs = new List<DateTime>();
+			//foreach (DataRow pRow in TinderUserInfoDB.Tables["tinderuserinfo"].Rows)
+			//{
+			//	IDs.Add((DateTime)pRow["id"]);
+			//}
 
 			Random RandomNum = new System.Random();
 			int Selector = RandomNum.Next(0, Count - 1);
@@ -132,9 +145,12 @@ namespace TinderConsoleServer
 		//いいねをカウントアップする関数 defaultcontrollerから引数IDを取得して該当するデータを変更する。
 		public static void INSERT_THUMBS(DateTime Datetimeid)
 		{
+			//SQL conection
+			//SQL 引数のID を使って 該当のデータのいいね数を+1でupdate 
+			//SQL conection
 
 			try
-			{   // 特定の名前の人のLiked数をユーザ名(id)で取得する
+			{   // 特定の名前の人の言い値数をユーザ名(できたらid)で取得する
 
 
 				// コネクション作成
@@ -159,7 +175,8 @@ namespace TinderConsoleServer
 					i = i + 1;
 				}
 
-				// testというユーザのLikedを現在のいいね数+1に変更する処理
+
+				// testというユーザの言い値を現在のいいね数+1に変更する処理
 				// コマンドを作成
 				MySqlCommand cmd = new MySqlCommand("update tinderuserinfo set liked=@liked where username=@username", cn);
 				// パラメータ設定
@@ -183,6 +200,11 @@ namespace TinderConsoleServer
 			{
 				Console.WriteLine("ERROR: " + me.Message);
 			}
+
+
+
+
+
 		}
 
 		// public static Person SELECT_user(DateTime outid) // コンフリクト修正のためコメントアウトさせていただきます
@@ -193,11 +215,12 @@ namespace TinderConsoleServer
 
 
 			// コネクション作成
+			// コネクション作成を共通のものに変更してみる
 			MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
 			
 			RetriveWholeDB();
 			MySqlCommand cmd = new MySqlCommand("SELECT * FROM tinderuserinfo", cn);
-
+			//cmd.Parameters.Add(new MySqlParameter("id", id)); // Primary key として時刻を選択
 			// オープン
 			cmd.Connection.Open();
 
@@ -214,12 +237,31 @@ namespace TinderConsoleServer
 			Bottom user = new Bottom();
 
 			var OnePersonInfo = TinderUserInfoDB.Tables["tinderuserinfo"].Rows[RandomRowNum];
-			string inisialization = "{\"tinderuserinfo\":[{\"id\":\"2020/01/01\",\"username\":\"RenewDisplayname\",\"age\":0,\"sex\":true,\"whoami\":\"RenewDisplayname\",\"liked\":0}]}";
+			string inisialization = "{\"tinderuserinfo\":[{\"id\":\"2018/05/01\",\"username\":\"htaa\",\"age\":11,\"sex\":true,\"whoami\":\"wgafai\",\"liked\":0}]}";
 			user = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(inisialization);
 			user.tinderuserinfo[0].Seter((DateTime)OnePersonInfo["id"], (string)OnePersonInfo["username"], (int)OnePersonInfo["age"], (bool)OnePersonInfo["sex"], (string)OnePersonInfo["whoami"], (int)OnePersonInfo["liked"]);
 
+
 			return user;
 		}
+
+		// エラー処理をする接続
+		//public static void ConnectDB()
+		//{
+		//	//// MySQLへの接続
+		//	try
+		//	{
+		//		// コネクション作成
+		//		MySqlConnection cn = new MySqlConnection(
+		//		 "Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
+
+		//	}
+		//	catch (MySqlException me)
+		//	{
+		//		Console.WriteLine("ERROR: " + me.Message);
+		//	}
+
+		//}
 	}
 
 }

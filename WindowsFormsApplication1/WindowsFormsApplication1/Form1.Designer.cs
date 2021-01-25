@@ -37,9 +37,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView_Ranking = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Registration_button = new System.Windows.Forms.Button();
             this.Update_button = new System.Windows.Forms.Button();
             this.Thumbup_button = new System.Windows.Forms.Button();
@@ -117,10 +114,6 @@
             // dataGridView_Ranking
             // 
             this.dataGridView_Ranking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Ranking.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
             this.dataGridView_Ranking.Location = new System.Drawing.Point(587, 183);
             this.dataGridView_Ranking.Name = "dataGridView_Ranking";
             this.dataGridView_Ranking.RowHeadersWidth = 51;
@@ -128,27 +121,6 @@
             this.dataGridView_Ranking.Size = new System.Drawing.Size(344, 276);
             this.dataGridView_Ranking.TabIndex = 17;
             this.dataGridView_Ranking.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Ranking_CellContentClick);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "ランキング";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 125;
             // 
             // Registration_button
             // 
@@ -251,9 +223,6 @@
         private System.Windows.Forms.Button Registration_button;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView_Ranking;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.Label ID_display;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;

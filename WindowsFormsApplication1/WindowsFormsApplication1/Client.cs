@@ -94,9 +94,7 @@ public class Client
 
     public void SetRenewDisplyaName(string ReveveMsg)
     {        
-        var Info = Newtonsoft.Json.JsonConvert.DeserializeObject<Root>(ReveveMsg);
-        //DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
-        //File.AppendAllText(@"‪tanaka.txt", ReveveMsg);
+        var Info = Newtonsoft.Json.JsonConvert.DeserializeObject<Bottom>(ReveveMsg);
         DisPlayName.id = Info.tinderuserinfo[0].id;
         DisPlayName.username = Info.tinderuserinfo[0].username;
         DisPlayName.age = Info.tinderuserinfo[0].age;
@@ -104,7 +102,6 @@ public class Client
         DisPlayName.whoami = Info.tinderuserinfo[0].whoami;
         DisPlayName.liked = Info.tinderuserinfo[0].liked;
 
-        //DisPlayName.Seter(Info.id, Info.username, Info.age, Info.sex, Info.whoami, Info.liked);
     }
 
     public void SetRankingData(Bottom RankingData)
