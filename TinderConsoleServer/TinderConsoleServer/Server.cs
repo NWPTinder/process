@@ -105,6 +105,7 @@ namespace TinderConsoleServer
                 string Translatedjson = JudegeSignal(content);
 
                 // 受信文字列を接続中全クライアントに送信。
+                //  実際にはクライアントを指定して送信する必要があるため修正が必要
                 Console.WriteLine($"送信データ: {Translatedjson} ");
                 SendAllClient(Translatedjson);
 
