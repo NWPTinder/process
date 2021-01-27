@@ -20,12 +20,18 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             Person display_user = new Person();
-            display_user = function.Get();
-            Name_display.Text = display_user.username;
-            Age_display.Text = display_user.age.ToString();
-            Description_display.Text = display_user.whoami;
-            ID_display.Text = display_user.id.ToString();
-
+            
+            if((display_user = function.Get()) != null)
+            {
+                Name_display.Text = display_user.username;
+                Age_display.Text = display_user.age.ToString();
+                Description_display.Text = display_user.whoami;
+                ID_display.Text = display_user.id.ToString();
+                var Ranking_Dataset = function.Get_Ranking();
+                DataTable Ranking_Table = new DataTable();
+                Ranking_Table = Ranking_Dataset.Tables["tinderuserinfo"];
+                dataGridView_Ranking.DataSource = Ranking_Table;
+            }
         }
 
 
@@ -36,13 +42,19 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void Thumbup_button_Click(object sender, EventArgs e)
         {
-            int IINE_ID = Convert.ToInt32(ID_display.Text);
+            string IINE_ID = ID_display.Text;
             Person display_user = new Person();
-            display_user = function.GET_IINE(IINE_ID);
-            Name_display.Text = display_user.username;
-            Age_display.Text = display_user.age.ToString();
-            Description_display.Text = display_user.whoami;
-            ID_display.Text = display_user.id.ToString();
+            if ((display_user = function.GET_IINE(IINE_ID)) != null)
+            {
+                Name_display.Text = display_user.username;
+                Age_display.Text = display_user.age.ToString();
+                Description_display.Text = display_user.whoami;
+                ID_display.Text = display_user.id.ToString();
+                var Ranking_Dataset = function.Get_Ranking();
+                DataTable Ranking_Table = new DataTable();
+                Ranking_Table = Ranking_Dataset.Tables["tinderuserinfo"];
+                dataGridView_Ranking.DataSource = Ranking_Table;
+            } 
         }
 
         /// <summary>
@@ -64,11 +76,20 @@ namespace WindowsFormsApplication1
         private void Update_button_Click(object sender, EventArgs e)
         {
             Person display_user = new Person();
-            display_user = function.Get();
-            Name_display.Text = display_user.username;
-            Age_display.Text = display_user.age.ToString();
-            Description_display.Text = display_user.whoami;
-            ID_display.Text = display_user.id.ToString();
+
+            if ((display_user = function.Get()) != null)
+            {
+                Name_display.Text = display_user.username;
+                Age_display.Text = display_user.age.ToString();
+                Description_display.Text = display_user.whoami;
+                ID_display.Text = display_user.id.ToString();
+                var Ranking_Dataset = function.Get_Ranking();
+                DataTable Ranking_Table = new DataTable();
+                Ranking_Table = Ranking_Dataset.Tables["tinderuserinfo"];
+                dataGridView_Ranking.DataSource = Ranking_Table;
+            }
+            
+
         }
 
 
