@@ -191,7 +191,6 @@ namespace TinderConsoleServer
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(temp);
                     break;
 
-
                 case "AddUser":
                     SQL_oparations.INSERT_DATA(JsonToPerson);
                     JsonToPerson.Signal = "AddedUser";

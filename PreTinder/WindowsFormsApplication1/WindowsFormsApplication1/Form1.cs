@@ -33,24 +33,36 @@ namespace WindowsFormsApplication1
             contents_Control.OneUpUser((DateTime.Parse(IINE_ID)));
             //ランキング表示処理
             var JsonRanking = contents_Control.GetUserRanking();
-            Bottom RankingData = JsonConvert.DeserializeObject<Bottom>(JsonRanking);
-            dataGridView_Ranking.Rows.Clear();
-            for (int Anumber = 0; Anumber < RankingData.tinderuserinfo.Count; Anumber++)
+            if (JsonRanking != null)
             {
-                string Sex = null;
-                if (RankingData.tinderuserinfo[Anumber].sex == true)
+                Bottom RankingData = JsonConvert.DeserializeObject<Bottom>(JsonRanking);
+                dataGridView_Ranking.Rows.Clear();
+                for (int Anumber = 0; Anumber < RankingData.tinderuserinfo.Count; Anumber++)
                 {
-                    Sex = "男";
-                }
-                else
-                {
-                    Sex = "女";
-                }
+                    string Sex = null;
+                    if (RankingData.tinderuserinfo[Anumber].sex == true)
+                    {
+                        Sex = "男";
+                    }
+                    else
+                    {
+                        Sex = "女";
+                    }
 
-                dataGridView_Ranking.Rows.Add(
-                    RankingData.tinderuserinfo[Anumber].username, RankingData.tinderuserinfo[Anumber].age, Sex, RankingData.tinderuserinfo[Anumber].liked
+                    dataGridView_Ranking.Rows.Add(
+                        RankingData.tinderuserinfo[Anumber].username, RankingData.tinderuserinfo[Anumber].age, Sex, RankingData.tinderuserinfo[Anumber].liked
+                        );
+                }
+            }
+            else
+            {
+                //Show message box
+                MessageBox.Show(
+                    "タイム・アウトしました。", "Timeout", MessageBoxButtons.OKCancel, MessageBoxIcon.Error
                     );
             }
+
+
         }
 
         /// <summary>
@@ -72,36 +84,62 @@ namespace WindowsFormsApplication1
         private void Update_button_Click(object sender, EventArgs e)
         {
             var DisplayUser = contents_Control.GetDisplayUserName();
-            Person json = JsonConvert.DeserializeObject<Person>(DisplayUser);
-            Name_display.Text = json.username;
-            Age_display.Text = json.age.ToString();
-            Description_display.Text = json.whoami;
-            ID_display.Text = json.id.ToString();
+            if (DisplayUser != null)
+            {
+                Person json = JsonConvert.DeserializeObject<Person>(DisplayUser);
+                Name_display.Text = json.username;
+                Age_display.Text = json.age.ToString();
+                Description_display.Text = json.whoami;
+                ID_display.Text = json.id.ToString();
+            }
+            else
+            {
+                //Show message box
+                MessageBox.Show(
+                    "タイム・アウトしました。", "Timeout", MessageBoxButtons.OKCancel, MessageBoxIcon.Error
+                    );
+            }
+
 
             //ランキング表示処理
             var JsonRanking = contents_Control.GetUserRanking();
-            Bottom RankingData = JsonConvert.DeserializeObject<Bottom>(JsonRanking);
-            dataGridView_Ranking.Rows.Clear();
-            for (int Anumber = 0; Anumber < RankingData.tinderuserinfo.Count; Anumber++)
+            if (JsonRanking != null)
             {
-                string Sex = null;
-                if (RankingData.tinderuserinfo[Anumber].sex == true)
+                Bottom RankingData = JsonConvert.DeserializeObject<Bottom>(JsonRanking);
+                dataGridView_Ranking.Rows.Clear();
+                for (int Anumber = 0; Anumber < RankingData.tinderuserinfo.Count; Anumber++)
                 {
-                    Sex = "男";
-                }
-                else
-                {
-                    Sex = "女";
-                }
+                    string Sex = null;
+                    if (RankingData.tinderuserinfo[Anumber].sex == true)
+                    {
+                        Sex = "男";
+                    }
+                    else
+                    {
+                        Sex = "女";
+                    }
 
-                dataGridView_Ranking.Rows.Add(
-                    RankingData.tinderuserinfo[Anumber].username, RankingData.tinderuserinfo[Anumber].age, Sex, RankingData.tinderuserinfo[Anumber].liked
+                    dataGridView_Ranking.Rows.Add(
+                        RankingData.tinderuserinfo[Anumber].username, RankingData.tinderuserinfo[Anumber].age, Sex, RankingData.tinderuserinfo[Anumber].liked
+                        );
+                }
+            }
+            else
+            {
+                //Show message box
+                MessageBox.Show(
+                    "タイム・アウトしました。", "Timeout", MessageBoxButtons.OKCancel, MessageBoxIcon.Error
                     );
             }
+
+
+
+
         }
 
-
-
-        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            var JsonRanking = contents_Control.GetUserRanking();
+        }
     }
 }

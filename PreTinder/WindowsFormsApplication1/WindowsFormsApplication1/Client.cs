@@ -19,7 +19,7 @@ public class Client
     public const int BufferSize = 1024;
     public byte[] Buffer { get; } = new byte[BufferSize];
 
-    public string ReveveMsg { get; set; }
+    public string ReveveMsg { get; set; } = null;
 
 
     public Client()
@@ -47,9 +47,16 @@ public class Client
     // メッセージの送信(同期処理)
     public void Send(string message)
     {
+        ReveveMsg = null;
+        int count = 0;
         var sendBytes = new UTF8Encoding().GetBytes(message);
         this.Socket.Send(sendBytes);
-        System.Threading.Thread.Sleep(9000);
+        while (ReveveMsg == null && count <= 20)
+        {
+            System.Threading.Thread.Sleep(500);
+            count += 1;
+        }
+        
     }
 
     // 非同期受信のコールバックメソッド(別スレッドで実行される)

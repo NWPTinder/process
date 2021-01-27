@@ -23,6 +23,7 @@ namespace TinderConsoleServer
 		//private  DataSet RetriveWholeDB(object sender, EventArgs e)
 		public static DataSet RetriveWholeDB()
 		{
+			TinderUserInfoDB = new DataSet();
 			//// MySQLへの接続
 			try
 			{
@@ -138,6 +139,7 @@ namespace TinderConsoleServer
 				MySqlConnection cn = new MySqlConnection("Data Source=us-cdbr-east-02.cleardb.com;Database=heroku_3c74537ac26405b;User ID=bcc8a0e09211c7;password=f783a8d5");
 				
 				int LikeCount = 0; // 初期化
+				
 				RetriveWholeDB();
 				//Console.WriteLine(TinderUserInfoDB.Tables["tinderuserinfo"].Rows[(int)1]["username"]);
 				int i = 0;
