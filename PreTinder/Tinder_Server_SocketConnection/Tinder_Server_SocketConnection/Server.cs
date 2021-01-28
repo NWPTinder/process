@@ -111,6 +111,7 @@ namespace TinderConsoleServer
 
                 // 受信時のコードバック処理を再設定
                 clientSocket.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReceiveCallback), state);
+                clientSocket.Close();
             }
             else
             {
